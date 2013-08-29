@@ -1,0 +1,212 @@
+#!/bin/bash
+echo""
+echo -e "\033[1;33m*** Welcome to SmoothSec Setup Wizard ***\033[0m\n"
+echo -e "\033[1;33mThe setup wizard will guide you to configure SmoothSec for the first time.\033[0m"
+echo -e "\033[1;33mPlease follow the setup wizard step by step to complete the basic configuration.\033[0m"
+echo""
+echo -e "\033[1;33mThe Wizard will guide you  through the following steps:\033[0m\n"
+echo -e "\033[1;33m1.Set root password.\033[0m"
+echo -e "\033[1;33m2.Choose the IDS engine (Snort or Suricata).\033[0m"
+echo -e "\033[1;33m3.Set the network interface to listen to.\033[0m"
+echo -e "\033[1;33m4.Configure the Local Area Network.\033[0m"
+echo -e "\033[1;33m5.Set Snorby web interface username and password.\033[0m"
+
+
+echo""
+echo -e "\033[1;31mChanging root password -  Please choose a strong one!\033[0m\n"
+/usr/bin/passwd
+EXIT=$?
+
+if [[ $EXIT != 0 ]]; then
+
+echo "EXIT"
+
+exit
+
+fi
+
+update-rc.d snorby defaults > /dev/null 2>&1
+update-rc.d apache2  defaults > /dev/null 2>&1
+update-rc.d arpalert defaults > /dev/null 2>&1
+/usr/sbin/make-ssl-cert  generate-default-snakeoil --force-overwrite > /dev/null 2>&1
+chmod +x /etc/init.d/ssh
+rm  /etc/ssh/ssh_host_*
+dpkg-reconfigure openssh-server > /dev/null 2>&1
+update-rc.d ssh defaults > /dev/null 2>&1
+cp /usr/local/smoothsec/rc.local.default /etc/rc.local
+chmod +x /etc/rc.local
+sed -i '/cdrom/d' /etc/apt/sources.list
+echo "#deb http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list
+echo "#deb-src http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list
+echo "deb http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main" >> /etc/apt/sources.list
+echo "deb-src http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main"  >> /etc/apt/sources.list
+
+function email_setup() {
+echo "Snorby Username (your_name@your_email.com) and Password creation." 
+echo""
+echo "Please enter your email address:"
+echo""
+read SMOOTHSEC_EMAIL
+echo "Please confirm your email address:"
+echo""
+read  SMOOTHSEC_EMAIL1
+}
+
+function  password_prompt() {
+echo -e "Please enter your desired Snorby password:\n"
+read -s SMOOTHSEC_PASSWORD
+echo -e "Please confirm your desired Snorby password:\n"
+read -s SMOOTHSEC_PASSWORD1
+}
+
+function snorby_setup() { 
+sed -i "s|SMOOTHSEC_EMAIL|$SMOOTHSEC_EMAIL1|g" /var/www/snorby/db/seeds.rb 
+sed -i "s|SMOOTHSEC_PASSWORD|$SMOOTHSEC_PASSWORD1|g" /var/www/snorby/db/seeds.rb
+echo""
+sleep 2
+echo "*** Please wait while the setup installs Snorby database. ***"
+echo""
+chown -R www-data.www-data /var/www/snorby/
+su www-data -c "cd /var/www/snorby; bundle exec rake snorby:setup RAILS_ENV=production" >> /var/log/snorby_install.log 2>&1 
+sleep 2
+
+if grep --quiet "Adding jobs to the queue" /var/log/snorby_install.log; then
+         
+       echo -e "\033[1;33m*** CONGRATULATIONS! Your SmoothSec setup has been successfully completed! ***\033[0m\n"
+       echo -e "\033[1;33mPlease reboot Smooth-sec typing:\033[0m  reboot\n"
+else
+       echo "Oops, something went wrong, please check the /var/log/snorby_install.log file"
+fi
+}
+
+echo""
+echo -e "\033[1;33mPlease select the Intrusion Detection Engine that you want to use.\033[0m\n"
+echo""
+PS3='Please enter your choice (type 1 for Snort or 2 for Suricata):'
+options=("snort" "suricata")
+
+select opt in "${options[@]}"
+do
+    case $opt in
+        "snort")
+            echo"" 
+            echo "You chose Snort."
+            echo""
+            echo -e "\033[1;33mNetwork setup..\033[0m\n"
+            echo "Interface - IP Address" 
+            /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }'|sed -e '/lo/d' |awk -F: '{ print $1 "        " $3 }'  
+            echo"" 
+            echo  "Enter the interface to monitor:" 
+            read -p "(only one interface is allowed,e.g. eth0):" VAR_INPUT
+            echo 'INTERFACES='$VAR_INPUT > /etc/ids.cfg
+            echo""     
+            echo  "Enter the address range for the local network"
+            read -p "(e.g. 192.168.1.0/24):" VAR_NET
+            echo"" 
+            sed -i "s|ipvar HOME_NET any|ipvar HOME_NET ${VAR_NET}|" /etc/snort/snort.conf
+            sed -i "s|anynet|${VAR_NET}|" /etc/suricata/suricata.yaml
+            echo""
+            echo "#RULES variable affects only snort. If you change it you need
+#to run smoothsec.snortrules.update"  >> /etc/ids.cfg
+            echo "#If you switch from "et" to "vrt" rules you must insert your 
+#oinkcode into /etc/pulledpork/snort/vrt.pulledpork.conf" >> /etc/ids.cfg
+            echo 'RULES=et' >> /etc/ids.cfg
+            echo "#Delete Snort/Suricata/Sagan unified files older than x-days" >> /etc/ids.cfg
+            echo 'DAYS=3'  >> /etc/ids.cfg
+            echo "#Default IDS, to change  IDS, run smoothsec.switch.ids" >> /etc/ids.cfg
+            echo 'IDS=snort'  >> /etc/ids.cfg
+            update-rc.d snort defaults > /dev/null 2>&1
+            update-rc.d sagan defaults > /dev/null 2>&1
+            crontab /usr/local/smoothsec/cronempty
+            crontab /usr/local/smoothsec/cronsnort 
+            echo ""
+            while :; do
+            email_setup
+            if [ $SMOOTHSEC_EMAIL != $SMOOTHSEC_EMAIL1 ]; 
+            then
+            echo""
+            echo -e "\033[31mEmail address do not match, try again..\033[0m\n"
+            continue
+            email_setup
+            else
+            break
+            fi
+            done
+
+            while :; do
+            password_prompt
+            if  [ $SMOOTHSEC_PASSWORD != $SMOOTHSEC_PASSWORD1 ] 
+            then
+            echo -e "\033[31mPasswords do not match, try again..\033[0m\n"
+            continue
+            password_prompt 
+            else
+            snorby_setup
+            exit
+            fi 
+            done
+            			
+            ;;
+        "suricata")
+            echo"" 
+            echo "You chose Suricata."
+            echo""
+            echo -e "\033[1;33mNetwork setup..\033[0m\n"
+            echo "Interface - IP Address" 
+            /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }'|sed -e '/lo/d' |awk -F: '{ print $1 "        " $3 }'  
+            echo""
+            echo  "Enter the interface to monitor,"
+            read -p "(only one interface is allowed,e.g. eth0):" VAR_INPUT
+            echo 'INTERFACES='$VAR_INPUT > /etc/ids.cfg
+            echo""
+            echo  "Enter the address range for the local network"
+            read -p "(e.g. 192.168.1.0/24):" VAR_NET
+            echo""
+            sed -i "s|anynet|${VAR_NET}|" /etc/suricata/suricata.yaml
+            sed -i "s|ipvar HOME_NET any|ipvar HOME_NET ${VAR_NET}|" /etc/snort/snort.conf
+            echo""
+            echo""
+            echo "#RULES variable affects only snort. If you change it you need
+#to run smoothsec.snortrules.update" >> /etc/ids.cfg
+            echo "#If you switch from "et" to "vrt" rules you must insert your 
+#oinkcode into /etc/pulledpork/snort/vrt.pulledpork.conf" >> /etc/ids.cfg
+            echo 'RULES=et' >> /etc/ids.cfg
+            echo "#Delete Snort/Suricata/Sagan unified files older than x-days" >> /etc/ids.cfg
+            echo 'DAYS=3'  >> /etc/ids.cfg
+            echo "#Default IDS, to change IDS, run smoothsec.switch.ids" >> /etc/ids.cfg
+            echo 'IDS=suricata'  >> /etc/ids.cfg
+            update-rc.d suricata defaults > /dev/null 2>&1
+            update-rc.d sagan defaults > /dev/null 2>&1
+            crontab /usr/local/smoothsec/cronempty
+            crontab /usr/local/smoothsec/cronsuricata
+            while :; do
+            email_setup
+            if [ $SMOOTHSEC_EMAIL != $SMOOTHSEC_EMAIL1 ]; 
+            then
+            echo""
+            echo -e "\033[31mEmail address do not match, try again..\033[0m\n"
+            continue
+            email_setup
+            else
+            break
+            fi
+            done
+
+            while :; do
+            password_prompt
+            if  [ $SMOOTHSEC_PASSWORD != $SMOOTHSEC_PASSWORD1 ] 
+            then
+            echo -e "\033[31mPasswords do not match, try again..\033[0m\n"
+            continue
+            password_prompt 
+            else
+            snorby_setup
+            #break
+            exit 
+            fi 
+            done 
+
+           ;;
+        *) echo invalid option;;
+    esac
+done
