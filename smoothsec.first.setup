@@ -35,11 +35,13 @@ dpkg-reconfigure openssh-server > /dev/null 2>&1
 update-rc.d ssh defaults > /dev/null 2>&1
 cp /usr/local/smoothsec/rc.local.default /etc/rc.local
 chmod +x /etc/rc.local
+rm /etc/apt/sources.list.d/smoothsec.list
+touch /etc/apt/sources.list.d/smoothsec.list
 sed -i '/cdrom/d' /etc/apt/sources.list
-echo "#deb http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list
-echo "#deb-src http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list
-echo "deb http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main" >> /etc/apt/sources.list
-echo "deb-src http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main"  >> /etc/apt/sources.list
+echo "#deb http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list.d/smoothsec.list
+echo "#deb-src http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list.d/smoothsec.list
+echo "deb http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main" >> /etc/apt/sources.list.d/smoothsec.list
+echo "deb-src http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main"  >> /etc/apt/sources.list.d/smoothsec.list
 
 function email_setup() {
 echo "Snorby Username (your_name@your_email.com) and Password creation." 
