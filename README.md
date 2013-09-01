@@ -18,7 +18,7 @@ ips-queue - Config file for suricata-ips-nfqueue.  It works with suricata-ips-nf
             It is placed at /etc/ and assumed the monitor interfaces is br0.
 
 smoothsec.debian.update - Bash script for updating Debian 7 (Wheezy) only but NOT the SmoothSec components.
-                          It can placed at /root/.
+                          It can be placed at /root/.
 
 smoothsec.first.setup - SmoothSec installer.  It can be running for more than one time.
                         However, the Snorby database content, Snorby user email and password remained unchange.
@@ -35,7 +35,7 @@ suricata-ips-afpacket.yaml - YAML config file of Suricata that running IPS (AF_P
                              Assumed that eth0 and eth1 are used for monitoring interfaces.
                              
 suricata-ips-nfqueue - Init script for Suricata that running IPS (NFQUEUE).  It works with ips-queue and
-                       /etc/init.d/bridge.  Assumed eth0 and eth1 are briged as br0.
+                       /etc/init.d/bridge.  Assumed eth0 and eth1 are bridged as br0.
                        It is placed at /etc/init.d/.  However, it should not be execuable when it is not implemented.
                        You can replace the original suricata init script with this script when
                        it is implemented.  Make sure to make it execuable before use.
