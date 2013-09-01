@@ -1,0 +1,89 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          suricata
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/Stop suricata IPS environment - NFQUEUE
+### END INIT INFO
+#by Samiux
+# Load the configuration parameters
+. /etc/ids.cfg
+
+# Load and calculate the number of queue for the CPU
+. /etc/ips-queue
+
+# iptables for Suricata inline mode
+iptables -F
+iptables -I INPUT -i $INTERFACES -j NFQUEUE --queue-balance 0:$QUEUE
+iptables -I OUTPUT -o $INTERFACES -j NFQUEUE --queue-balance 0:$QUEUE
+iptables -I FORWARD -i $INTERFACES -o $INTERFACES -j NFQUEUE --queue-balance 0:$QUEUE
+
+# Restart fail2ban (uncomment it if you installed it)
+# It is because iptables rules will flushed on every run
+#/etc/init.d/fail2ban restart
+
+case "$1" in
+start)
+
+echo "Starting Suricata"
+
+/usr/local/bin/suricata  --user suricata -c /etc/suricata/suricata.yaml  $PARAMETER -D
+
+/usr/local/bin/pigsty -c /etc/pigsty/suricata.pigsty.config.js -i $INTERFACES  -n "Suricata" -d /var/log/suricata/ -m unified2.alert.*  -D
+
+;;
+
+stop)
+
+echo "Stoppping pigsty spooler"
+SURICATAPIGSTY_PID=`cat /var/run/pigsty.suricata.pid`
+kill -9 $SURICATAPIGSTY_PID
+rm /var/run/pigsty.suricata.pid
+echo "Stopping Suricata"
+killall -9 Suricata-Main
+
+;;
+
+restart)
+
+echo "Stoppping pigsty spooler"
+SURICATAPIGSTY_PID=`cat /var/run/pigsty.suricata.pid`
+kill -9 $SURICATAPIGSTY_PID
+rm /var/run/pigsty.suricata.pid
+echo "Stopping Suricata"
+killall -9 Suricata-Main
+
+
+sleep 3
+
+
+echo "Starting Suricata"
+/usr/local/bin/suricata  --user suricata -c /etc/suricata/suricata.yaml  $PARAMETER -D
+
+echo "Starting pigsty"
+/usr/local/bin/pigsty -c /etc/pigsty/suricata.pigsty.config.js -i $INTERFACES  -n "Suricata" -d /var/log/suricata/ -m unified2.alert.*  -D
+
+;;
+
+enable)
+
+echo "Enable Suricata and Pigsty to start at boot time"
+update-rc.d suricata enable
+;;
+
+disable)
+echo "Disable Suricata and Pigsty to start at boot time"
+update-rc.d suricata disable
+
+;;
+
+*)
+ echo "Usage: /etc/init.d/suricata {start|stop|restart|enable|disable}"
+ exit 1
+  ;;
+esac
+
+exit 0
