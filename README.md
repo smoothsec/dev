@@ -4,7 +4,7 @@ dev
 SmoothSec development.
 Branch - samiux
 
-email - runnersa {at} @gmail {dot} com
+email - runnersa {at} gmail {dot} com
 
 Blog - samiux.blogspot.com
 
