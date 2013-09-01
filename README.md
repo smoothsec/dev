@@ -15,10 +15,10 @@ channel - #smooth-sec
 
 Files Description :
 
-local.rules - Drop rule for testing.  All traffic related to port 80 will be blocked.
-
 ips-queue - Config file for suricata-ips-nfqueue.  It works with suricata-ips-nfqueue.
             It is placed at /etc/ and assumed the monitor interfaces is br0.
+
+local.rules - Drop rule for testing.  All traffic related to port 80 will be blocked.
 
 smoothsec.debian.update - Bash script for updating Debian 7 (Wheezy) only but NOT the SmoothSec components.
                           It can be placed at /root/.
