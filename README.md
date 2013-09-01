@@ -4,9 +4,12 @@ dev
 SmoothSec development.
 Branch - samiux
 
-email - runnersam@gmail.com
+email - runnersa {at} @gmail {dot} com
+
 Blog - samiux.blogspot.com
+
 irc - freenode
+
 channel - #smooth-sec
 
 Files Description :
