@@ -2,3 +2,5 @@ dev
 ===
 
 SmoothSec development.
+
+Scripts
