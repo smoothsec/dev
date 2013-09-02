@@ -11,6 +11,15 @@ mysqltuner
 username : root
 password : toor
 
+To refer to the test result for the performance.
+
+Or, you can try the following setting.  The 4GB RAM and Atom D510 system.
+
+nano /etc/mysql/my.cnf
+
+query_cache_limit = 1024K
+query_cache_size = 128M
+
 (3) To tune Linux Kernel (SmoothSec) :
 
 Reboot may required.
