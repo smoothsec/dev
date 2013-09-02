@@ -43,3 +43,4 @@ suricata-ips-nfqueue - Init script for Suricata that running IPS (NFQUEUE).  It 
                        You can replace the original suricata init script with this script when
                        it is implemented.  Make sure to make it execuable before use.
 
+tips.info - Tips for using and manage SmoothSec
