@@ -98,3 +98,9 @@ Reboot may required.
 nano /etc/fstab
 
 add "discard,nodiratime,noatime" just before "errors=remount-ro" and "defaults"
+
+(6) Monitor MySQL performance :
+
+mytop -uroot -ptoor
+
+
