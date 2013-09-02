@@ -80,8 +80,17 @@ update-rc.d suricata disable
 
 ;;
 
+reload)
+
+echo "Reloading Suricata rules without restarting Suricata"
+
+SURICATA_PID=`pidof suricata`
+kill -USR2 $SURICATA_PID
+
+;;
+
 *)
- echo "Usage: /etc/init.d/suricata {start|stop|restart|enable|disable}"
+ echo "Usage: /etc/init.d/suricata {start|stop|restart|enable|disable|reload}"
  exit 1
   ;;
 esac
