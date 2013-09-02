@@ -3,7 +3,7 @@ dev
 
 SmoothSec development.
 
-<b>Branch - samiux</b>
+<h1><b>Branch - samiux</b></h1>
 
 email - runnersam {at} gmail {dot} com
 
@@ -40,7 +40,7 @@ channel - #smooth-sec
                              
 <b>suricata-ips-nfqueue</b> - Init script for Suricata that running IPS (NFQUEUE).  It works with ips-queue and
                        <code>/etc/init.d/bridge</code>.  Assumed eth0 and eth1 are bridged as br0.
-                       It is placed at /etc/init.d/.  However, it should not be execuable when it is not implemented.
+                       It is placed at <code>/etc/init.d/</code>.  However, it should not be execuable when it is not implemented.
                        You can replace the original suricata init script with this script when
                        it is implemented.  Make sure to make it execuable before use.
 
