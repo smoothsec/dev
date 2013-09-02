@@ -1,0 +1,30 @@
+#!/bin/bash
+
+export PERL_LWP_SSL_VERIFY_HOSTNAME=0
+
+. /etc/ids.cfg
+
+if [ $RULES == "et" ]
+then
+ 	#emerging threats rules for snort
+	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/et.pulledpork.conf -o /etc/snort/et/snort.rules
+	/etc/init.d/sagan restart
+	/etc/init.d/snort restart
+
+elif
+
+ [ $RULES == "vrt" ] 
+then
+
+        #Official VRT rules for snort
+	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/vrt.pulledpork.conf -o /etc/snort/vrt/snort.rules
+	/etc/init.d/sagan restart
+	/etc/init.d/snort restart
+
+else 
+
+echo "Invalid rule input"
+
+fi
+
+
