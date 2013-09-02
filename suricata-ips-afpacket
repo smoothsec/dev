@@ -6,7 +6,7 @@
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # X-Interactive:     true
-# Short-Description: Start/Stop suricata IPS environment - AF_PACKET
+# Short-Description: Start/Stop suricata IPS environment
 ### END INIT INFO
 
 . /etc/ids.cfg
@@ -16,7 +16,7 @@ start)
 
 echo "Starting Suricata"
 
-/usr/local/bin/suricata  --user suricata -c /etc/suricata/suricata-ips-afpacket.yaml  --af-packet -D
+/usr/local/bin/suricata  --user suricata -c /etc/suricata/suricata.yaml  --af-packet -D
 
 /usr/local/bin/pigsty -c /etc/pigsty/suricata.pigsty.config.js -i $INTERFACES  -n "Suricata" -d /var/log/suricata/ -m unified2.alert.*  -D
 
@@ -48,7 +48,7 @@ sleep 3
 
 echo "Starting Suricata"
 
-/usr/local/bin/suricata --user suricata -c /etc/suricata/suricata-ips-afpacket.yaml  --af-packet -D
+/usr/local/bin/suricata --user suricata -c /etc/suricata/suricata.yaml  --af-packet -D
 
 echo "Starting pigsty"
 /usr/local/bin/pigsty -c /etc/pigsty/suricata.pigsty.config.js -i $INTERFACES  -n "Suricata" -d /var/log/suricata/ -m unified2.alert.*  -D
@@ -67,8 +67,17 @@ update-rc.d suricata disable
 
 ;;
 
+reload)
+
+echo "Reloading Suricata rules without restarting Suricata"
+
+SURICATA_PID=`pidof suricata`
+kill -USR2 $SURICATA_PID
+
+;;
+
 *)
- echo "Usage: /etc/init.d/suricata {start|stop|restart|enable|disable}"
+ echo "Usage: /etc/init.d/suricata {start|stop|restart|enable|disable|reload}"
  exit 1
   ;;
 esac
