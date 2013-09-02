@@ -13,7 +13,8 @@ irc - freenode
 
 channel - #smooth-sec
 
-[b]Files Description :[/b]
+<b>Files Description :</b>
+
 
 ips-queue - Config file for suricata-ips-nfqueue.  It works with suricata-ips-nfqueue.
             It is placed at /etc/ and assumed the monitor interfaces is br0.
