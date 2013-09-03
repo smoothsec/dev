@@ -1,0 +1,9 @@
+#!/bin/bash
+# Put this file and chkpigstylog at /root/.
+# Then create a cron job to test it on every 5 minutes.
+# crontab -e
+# */5 * * * * /root/chkpigstylog
+#
+/usr/local/bin/pigsty -c /etc/pigsty/suricata.pigsty.config.js -i eth0 -n "Suricata" -d /var/log/suricata/ -m unified2.alert.* -D
+
+
