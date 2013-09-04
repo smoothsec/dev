@@ -1,0 +1,5 @@
+# Update Snorby
+cd /var/www/snorby
+git pull origin master
+rake snorby:update
+cd ~
