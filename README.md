@@ -30,6 +30,9 @@ channel - #smooth-sec
 <b>smoothsec.debian.update</b> - Bash script for updating Debian 7 (Wheezy) only but NOT the SmoothSec components.
                           It can be placed at <code>/root/</code>.
 
+<b>smoothsec.pigsty.update</b> - Bash script for updating Pigsty.  You can place it at 
+                          <code>/root/</code>.
+
 <b>smoothsec.suricata.rules.update</b> - Bash script for updating Emergingthreat rules without restarting Suricata.
 
 <b>smoothsec.first.setup</b> - SmoothSec installer.  It can be running for more than one time.
