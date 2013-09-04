@@ -1,0 +1,3 @@
+# Update Pigsty
+npm update pigsty-mysql -g
+npm update pigsty -g
