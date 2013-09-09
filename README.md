@@ -16,16 +16,10 @@ channel - #smooth-sec
 <h2><b>Files Description :</b></h2>
 
 
-<b>chkpigstylog</b> - Since Pigsty will crash randomly.  This bash script will check if it is crashed or not on every 5 minutes.
-               If crashed, it will start Pigstry again.  It works with runpigsty and cron job.
-
 <b>ips-queue</b> - Config file for suricata-ips-nfqueue.  It works with suricata-ips-nfqueue.
             It is placed at <code>/etc/</code> and assumed the monitor interfaces is br0.
 
 <b>local.rules</b> - Drop rule for testing.  All traffic related to port 80 will be blocked.
-
-<b>runpigsty</b> - Since Pigsty will crash randomly.  This bash script will run Pigsty again when it is crashed. It works
-            with chkpigstylog and cron job.
 
 <b>smoothsec.debian.update</b> - Bash script for updating Debian 7 (Wheezy) only but NOT the SmoothSec components.
                           It can be placed at <code>/root/</code>.
