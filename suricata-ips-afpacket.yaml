@@ -347,7 +347,7 @@ detect-engine:
   - rule-reload: true
   # If set to yes, the loading of signatures will be made after the capture
   # is started. This will limit the downtime in IPS mode.
-  #- delayed-detect: yes
+  - delayed-detect: yes
 
 # Suricata is multi-threaded. Here the threading can be influenced.
 threading:
