@@ -1,0 +1,39 @@
+. /etc/afpacket.cfg
+
+touch /etc/apt/sources.list.d/newkernel.list
+echo "deb http://us.debian.org/debian unstable main" > /etc/apt/sources.list.d/newkernel.list
+echo "deb-src http://us.debian.org/debian unstable main" >> /etc/apt/sources.list.d/newkernel.list
+
+apt-get update
+apt-get install linux-image-3.10-2-amd64 linux-headers-3.10-2-amd64
+
+rm /etc/apt/sources.list.d/newkernel.list
+
+cp /etc/suricata/suricata.yaml /usr/local/smoothsec/confs/afpacket/suricata.yaml.original
+cp /usr/local/smoothsec/confs/afpacket/suricata-afpacket.yaml.template /etc/suricata/suricat-afpacket.yaml
+sed -i "s|anynet|$AF_HOME_NETWORK|" /etc/suricata/suricata-afpacket.yaml
+sed -i "s|af_iface_0|$AF_IFACE_O|" /etc/suricata/suricata-afpacket.yaml
+sed -i "s|af_iface_1|$AF_IFACE_1|" /etc/suricata/suricata-afpacket.yaml
+sed -i "s|af_mode|$AF_MODE|" /etc/suricata/suricata-afpacket.yaml
+sed -i "s|af_core|$AF_CORE|" /etc/suricata/suricata-afpacket.yaml
+mv /etc/suricata/suricata-afpacket.yaml /etc/suricata/suricata.yaml
+
+cp /etc/network/interfaces /usr/local/smoothsec/confs/afpacket/interfaces.original
+cp /usr/local/smoothsec/confs/afpacket/interfaces.afpacket.template /etc/network/interfaces.afpacket
+sed -i "s|af_iface_0|$AF_IFACE_O|" /etc/network/interfaces.afpacket
+sed -i "s|af_iface_1|$AF_IFACE_1|" /etc/network/interfaces.afpacket
+sed -i "s|af_manage_iface|$AF_MANAGE_IFACE|" /etc/network/interfaces.afpacket
+sed -i "s|af_sensor_ip|$AF_SENSOR_IP|" /etc/network/interfaces.afpacket
+sed -i "s|af_gateway|$AF_GATEWAY|" /etc/network/interfaces.afpacket
+mv /etc/network/interfaces.afpacket /etc/network/interfaces
+
+cp /etc/sagan/sagan.conf /usr/local/smoothsec/confs/afpacket/sagan.conf.original
+cp /usr/local/smoothsec/confs/afpacket/sagan.conf.template /etc/sagan/sagan-afpacket.conf
+sed -i "s|anynet|$AF_SENSOR_IP|" /etc/sagan-afpacket.conf
+mv /etc/sagan-afpacket.conf /etc/sagan.conf
+
+cp /etc/init.d/suricata /usr/local/smoothsec/confs/afpacket/suricata.original
+cp /usr/local/smoothsec/confs/afpacket/suricata-afpacket.template /etc/init.d/suricata-afpacket
+update-rc.d suricata-afpacket defaults > /dev/null 2>&1
+
+echo "Reboot the system ...."
