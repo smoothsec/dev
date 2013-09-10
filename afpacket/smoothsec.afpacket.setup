@@ -36,4 +36,6 @@ cp /etc/init.d/suricata /usr/local/smoothsec/confs/afpacket/suricata.original
 cp /usr/local/smoothsec/confs/afpacket/suricata-afpacket.template /etc/init.d/suricata-afpacket
 update-rc.d suricata-afpacket defaults > /dev/null 2>&1
 
+echo "AF_SETUP=yes" >> /etc/afpacket.cfg
+
 echo "Reboot the system ...."
