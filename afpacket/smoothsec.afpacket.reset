@@ -1,0 +1,10 @@
+. /etc/smoothsec.cfg
+
+update-rc.d suricata-afpacket remove > /dev/null 2>&1
+cp /usr/local/smoothsec/confs/afpacket/interfaces.original /etc/network/interfaces
+cp /usr/local/smoothsec/confs/afpacket/suricata.yaml.original /etc/suricata/suricata.yaml
+cp /usr/local/smoothsec/confs/afpacket/sagan.conf.original /etc/sagan/sagan.conf
+
+update-rc.d $ENGINE defaults > /dev/null 2>&1
+
+echo "Reboot the system ...."
