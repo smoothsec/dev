@@ -1,11 +1,13 @@
 . /etc/smoothsec.cfg
+. /etc/afpacket.cfg
 
 update-rc.d suricata-afpacket remove > /dev/null 2>&1
 
-if $AF_SET == "no"; then
-cp /usr/local/smoothsec/confs/afpacket/interfaces.original /etc/network/interfaces
-cp /usr/local/smoothsec/confs/afpacket/suricata.yaml.original /etc/suricata/suricata.yaml
-cp /usr/local/smoothsec/confs/afpacket/sagan.conf.original /etc/sagan/sagan.conf
+if [ "$AF_SETUP" == "yes" ]; then
+	cp /usr/local/smoothsec/confs/afpacket/interfaces.original /etc/network/interfaces
+	cp /usr/local/smoothsec/confs/afpacket/suricata.yaml.original /etc/suricata/suricata.yaml
+	cp /usr/local/smoothsec/confs/afpacket/sagan.conf.original /etc/sagan/sagan.conf
+	sed -i "s|AF_SETUP=yes|AF_SETUP=no|" /etc/afpacket.cfg
 fi
 
 update-rc.d $ENGINE defaults > /dev/null 2>&1
