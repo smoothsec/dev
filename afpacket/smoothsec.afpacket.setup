@@ -28,7 +28,7 @@ sed -i "s|af_iface_0|$AF_IFACE_0|" /etc/suricata/suricata-afpacket.yaml
 sed -i "s|af_iface_1|$AF_IFACE_1|" /etc/suricata/suricata-afpacket.yaml
 sed -i "s|af_mode|$AF_MODE|" /etc/suricata/suricata-afpacket.yaml
 sed -i "s|af_core|$AF_CORE|" /etc/suricata/suricata-afpacket.yaml
-mv /etc/suricata/suricata-afpacket.yaml /etc/suricata/suricata.yaml
+cp /etc/suricata/suricata-afpacket.yaml /etc/suricata/suricata.yaml
 
 cp /usr/local/smoothsec/confs/afpacket/interfaces.afpacket.template /etc/network/interfaces.afpacket
 sed -i "s|af_iface_0|$AF_IFACE_0|" /etc/network/interfaces.afpacket
@@ -36,11 +36,11 @@ sed -i "s|af_iface_1|$AF_IFACE_1|" /etc/network/interfaces.afpacket
 sed -i "s|af_manage_iface|$AF_MANAGE_IFACE|" /etc/network/interfaces.afpacket
 sed -i "s|af_sensor_ip|$AF_SENSOR_IP|" /etc/network/interfaces.afpacket
 sed -i "s|af_gateway|$AF_GATEWAY|" /etc/network/interfaces.afpacket
-mv /etc/network/interfaces.afpacket /etc/network/interfaces
+cp /etc/network/interfaces.afpacket /etc/network/interfaces
 
 cp /usr/local/smoothsec/confs/afpacket/sagan.conf.template /etc/sagan/sagan-afpacket.conf
 sed -i "s|anynet|$AF_SENSOR_IP|" /etc/sagan/sagan-afpacket.conf
-mv /etc/sagan/sagan-afpacket.conf /etc/sagan.conf
+cp /etc/sagan/sagan-afpacket.conf /etc/sagan.conf
 
 cp /usr/local/smoothsec/confs/afpacket/suricata-afpacket.template /etc/init.d/suricata
 update-rc.d suricata defaults > /dev/null 2>&1
