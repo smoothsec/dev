@@ -1,6 +1,6 @@
-. /etc/afpacket.cfg
+nano /etc/afpacket.cfg
 
-sudo -sH
+. /etc/afpacket.cfg
 
 if [ "$AF_SETUP" == "no" ]; then
 	cp /etc/suricata/suricata.yaml /usr/local/smoothsec/confs/afpacket/suricata.yaml.original
@@ -15,6 +15,7 @@ echo "deb-src http://ftp.us.debian.org/debian unstable main" >> /etc/apt/sources
 
 apt-get update
 apt-get -y install linux-image-3.10-2-amd64 linux-headers-3.10-2-amd64
+update-grub
 
 rm /etc/apt/sources.list.d/newkernel.list
 
