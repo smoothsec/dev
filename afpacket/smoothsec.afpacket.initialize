@@ -5,4 +5,5 @@ cp smoothsec.afpacket.reset /usr/local/sbin/
 cp smoothsec.afpacket.setup /usr/local/sbin/
 cp suricata-afpacket.template /usr/local/smoothsec/confs/afpacket/
 cp suricata-afpacket.yaml.template /usr/local/smoothsec/confs/afpacket/
+cp afpacket.cfg /usr/local/smoothsec/confs/afpacket/
 cp afpacket.cfg /etc/
