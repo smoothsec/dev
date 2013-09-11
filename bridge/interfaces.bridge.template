@@ -1,0 +1,16 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+#allow-hotplug eth2
+#iface eth2 inet dhcp
+
+auto br_manage_iface
+iface br_manage_iface inet static
+	address br_sensor_ip
+	netmask 255.255.255.0
+	gateway br_gateway
