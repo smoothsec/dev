@@ -7,6 +7,7 @@ The following scripts are for delopying Suricata inline mode and IDS mode with A
 <code>wget https://github.com/smoothsec/dev/archive/samiux.zip</code>
 
 <code>apt-get install unzip</code>
+
 <code>unzip samiux.zip</code>
 
 <code>cd dev-samiux/afpacket/</code>
