@@ -40,7 +40,7 @@ cp /etc/network/interfaces.afpacket /etc/network/interfaces
 
 cp /usr/local/smoothsec/confs/afpacket/sagan.conf.template /etc/sagan/sagan-afpacket.conf
 sed -i "s|anynet|$AF_SENSOR_IP|" /etc/sagan/sagan-afpacket.conf
-cp /etc/sagan/sagan-afpacket.conf /etc/sagan.conf
+cp /etc/sagan/sagan-afpacket.conf /etc/sagan/sagan.conf
 
 cp /usr/local/smoothsec/confs/afpacket/suricata-afpacket.template /etc/init.d/suricata
 update-rc.d suricata defaults > /dev/null 2>&1
