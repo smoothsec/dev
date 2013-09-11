@@ -1,6 +1,6 @@
 This folder is designed for SmoothSec 3.4 or higher.  This folder is under heavy development.  Changes and bugs may be expected.
 
-The following scripts are for delopying Suricata inline mode and IDS mode with AF_PACKET.  The Snort version is devleoping.
+The following scripts are for delopying Suricata inline mode and IDS mode with AF_PACKET.  The Snort version is under development.
 
 <h3>Download and install the scripts</h3>
 
