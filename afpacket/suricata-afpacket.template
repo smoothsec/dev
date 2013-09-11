@@ -19,7 +19,7 @@ echo "Starting Suricata"
 
 /usr/local/bin/suricata  --user suricata -c /etc/suricata/suricata.yaml  --af-packet -D
 
-/usr/local/bin/pigsty -c /etc/pigsty/suricata.pigsty.config.js -i $AF_SENSOR_IP  -n "Suricata  $SENSOR_IP" -d /var/log/suricata/ -m unified2.alert.*  -D
+/usr/local/bin/pigsty -c /etc/pigsty/suricata.pigsty.config.js -i $INTERFACE_DEF  -n "Suricata  $AF_SENSOR_IP" -d /var/log/suricata/ -m unified2.alert.*  -D
 ;;
 
 stop)
@@ -50,7 +50,7 @@ echo "Starting Suricata"
 /usr/local/bin/suricata --user suricata -c /etc/suricata/suricata.yaml  --af-packet -D
 
 echo "Starting pigsty"
-/usr/local/bin/pigsty -c /etc/pigsty/suricata.pigsty.config.js -i $AF_SENSOR_IP  -n "Suricata  $SENSOR_IP" -d /var/log/suricata/ -m unified2.alert.*  -D
+/usr/local/bin/pigsty -c /etc/pigsty/suricata.pigsty.config.js -i INTERFACE_DEF  -n "Suricata  $AF_SENSOR_IP" -d /var/log/suricata/ -m unified2.alert.*  -D
 ;;
 
 reload)                                                                                                                           
