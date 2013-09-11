@@ -1,5 +1,7 @@
 . /etc/afpacket.cfg
 
+sudo -sH
+
 if [ "$AF_SETUP" == "no" ]; then
 	cp /etc/suricata/suricata.yaml /usr/local/smoothsec/confs/afpacket/suricata.yaml.original
 	cp /etc/network/interfaces /usr/local/smoothsec/confs/afpacket/interfaces.original
