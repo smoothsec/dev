@@ -2,16 +2,16 @@ This folder is designed for SmoothSec 3.4 or higher.  This folder is under heavy
 
 The following scripts are for delopying Suricata inline mode and IDS mode with AF_PACKET.  The Snort version is devleoping.
 
-<h3>Download and install the scripts</3>
+<h3>Download and install the scripts</h3>
 
-<code>wget https://github.com/smoothsec/dev/archive/samiux.zip</br>
+<code>wget https://github.com/smoothsec/dev/archive/samiux.zip</code>
 
-apt-get install unzip</br>
-unzip samiux.zip</br>
+<code>apt-get install unzip</code>
+<code>unzip samiux.zip</code>
 
-cd dev-samiux/afpacket/</br>
+<code>cd dev-samiux/afpacket/</code>
 
-./smoothsec.afpacket.initialize</code>
+<code>./smoothsec.afpacket.initialize</code>
 
 <h3>Delopying Suricata with AF_PACKET</h3>
 
