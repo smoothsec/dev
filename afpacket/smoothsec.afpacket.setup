@@ -6,7 +6,7 @@ if [ "$AF_SETUP" == "no" ]; then
 	cp /etc/suricata/suricata.yaml /usr/local/smoothsec/confs/afpacket/suricata.yaml.original
 	cp /etc/network/interfaces /usr/local/smoothsec/confs/afpacket/interfaces.original
 	cp /etc/sagan/sagan.conf /usr/local/smoothsec/confs/afpacket/sagan.conf.original
-	#cp /etc/init.d/suricata /usr/local/smoothsec/confs/afpacket/suricata.original
+	cp /etc/init.d/suricata /usr/local/smoothsec/confs/afpacket/suricata.original
 fi
 
 if [ ! -f /usr/local/smoothsec/confs/afpacket/initrd.img-3.10-2-amd64 ]; then
@@ -42,8 +42,8 @@ cp /usr/local/smoothsec/confs/afpacket/sagan.conf.template /etc/sagan/sagan-afpa
 sed -i "s|anynet|$AF_SENSOR_IP|" /etc/sagan/sagan-afpacket.conf
 mv /etc/sagan/sagan-afpacket.conf /etc/sagan.conf
 
-cp /usr/local/smoothsec/confs/afpacket/suricata-afpacket.template /etc/init.d/suricata-afpacket
-update-rc.d suricata-afpacket defaults > /dev/null 2>&1
+cp /usr/local/smoothsec/confs/afpacket/suricata-afpacket.template /etc/init.d/suricata
+update-rc.d suricata defaults > /dev/null 2>&1
 
 sed -i "s|AF_SETUP=no|AF_SETUP=yes|" /etc/afpacket.cfg
 
