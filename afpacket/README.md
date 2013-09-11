@@ -22,7 +22,7 @@ router -- Smoothsec -- switch -- computers
 
 First of all, you need to run <code>smoothsec.first.setup</code> but no need to reboot.
 
-Make sure you are root.  Then run <code>smoothsec.afpacket.setup</code>.  A nano editor will be shown up with the afpacket.cfg file.
+Make sure you are root.  Then run <code>smoothsec.afpacket.setup</code>.  A nano editor will be shown up with the <code>afpacket.cfg</code> file.
 
 Just edit when necessary.
 
