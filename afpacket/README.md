@@ -19,9 +19,9 @@ You need 3 network interface cards, such as eth0, eth1 and eth2.  If you want to
 
 router -- Smoothsec -- switch -- computers
 
-First of all, you need to run smoothsec.first.setup but no need to reboot.
+First of all, you need to run <code>smoothsec.first.setup</code> but no need to reboot.
 
-Make sure you are root.  Then run smoothsec.afpacket.setup.  A nano editor will be shown up with the afpacket.cfg file.
+Make sure you are root.  Then run <code>smoothsec.afpacket.setup</code>.  A nano editor will be shown up with the afpacket.cfg file.
 
 Just edit when necessary.
 
@@ -47,11 +47,15 @@ AF_SETUP - DO NOT TOUCH THIS SETTINGS; OTHERWISE, YOUR SYSTEM WILL BE BROKEN.
 
 <h3>Reset the deployment</h3>
 
-When you want to reset the AF_PACKET deployment back to the smoothsec.first.setup environment, you just run the following command :
+When you want to reset the AF_PACKET deployment back to the <code>smoothsec.first.setup</code> environment, you just run the following command :
+
+Make sure you are root.
 
 <code>smoothsec.afpacket.reset</code>
 
 If you want to reset the box to the fresh install, you can run the following command then :
+
+Make sure you are root.
 
 <code>smoothsec.reset</code>
 
