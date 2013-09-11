@@ -9,7 +9,7 @@ if [ "$AF_SETUP" == "no" ]; then
 	#cp /etc/init.d/suricata /usr/local/smoothsec/confs/afpacket/suricata.original
 fi
 
-if [ !-f /usr/local/smoothsec/confs/afpacket/initrd.img-3.10-2-amd64 ]; then
+if [ ! -f /usr/local/smoothsec/confs/afpacket/initrd.img-3.10-2-amd64 ]; then
 	touch /etc/apt/sources.list.d/newkernel.list
 	echo "deb http://ftp.us.debian.org/debian unstable main" > /etc/apt/sources.list.d/newkernel.list
 	echo "deb-src http://ftp.us.debian.org/debian unstable main" >> /etc/apt/sources.list.d/newkernel.list
