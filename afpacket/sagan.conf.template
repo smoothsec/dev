@@ -69,7 +69,7 @@ var SQUID_PORT 3128
 #
 # [Required]
   
-sagan_host 192.168.20.182
+sagan_host anynet
 sagan_port 514
 
 # If logging to a Snort database and a rule specifies the
