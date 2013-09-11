@@ -8,6 +8,7 @@ if [ "$AF_SETUP" == "yes" ]; then
 	cp /usr/local/smoothsec/confs/afpacket/suricata.yaml.original /etc/suricata/suricata.yaml
 	cp /usr/local/smoothsec/confs/afpacket/suricata.original /etc/init.d/suricata
 	cp /usr/local/smoothsec/confs/afpacket/sagan.conf.original /etc/sagan/sagan.conf
+	cp /usr/local/smoothsec/confs/afpacket/sagan.original /etc/init.d/sagan
 	#apt-get -y --purge remove linux-image-3.10-2-amd64 linux-headers-3.10-2-amd64
 	mv /boot/*-3.10-2-* /usr/local/smoothsec/confs/afpacket/
 	update-grub
