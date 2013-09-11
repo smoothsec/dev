@@ -12,7 +12,7 @@ echo "deb http://ftp.us.debian.org/debian unstable main" > /etc/apt/sources.list
 echo "deb-src http://ftp.us.debian.org/debian unstable main" >> /etc/apt/sources.list.d/newkernel.list
 
 apt-get update
-apt-get install linux-image-3.10-2-amd64 linux-headers-3.10-2-amd64
+apt-get -y install linux-image-3.10-2-amd64 linux-headers-3.10-2-amd64
 
 rm /etc/apt/sources.list.d/newkernel.list
 
