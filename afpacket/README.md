@@ -2,18 +2,18 @@ This folder is designed for SmoothSec 3.4 or higher.  This folder is under heavy
 
 The following scripts are for delopying Suricata inline mode and IDS mode with AF_PACKET.  The Snort version is devleoping.
 
-[h3]Download and install the scripts[/3]
+<h3>Download and install the scripts</3>
 
-[code]wget https://github.com/smoothsec/dev/archive/samiux.zip
+<code>wget https://github.com/smoothsec/dev/archive/samiux.zip
 
 apt-get install unzip
 unzip samiux.zip
 
 cd dev-samiux/afpacket/
 
-./smoothsec.afpacket.initialize[/code]
+./smoothsec.afpacket.initialize</code>
 
-[h3]Delopying Suricata with AF_PACKET[/h3]
+<h3>Delopying Suricata with AF_PACKET</h3>
 
 You need 3 network interface cards, such as eth0, eth1 and eth2.  If you want to use eth0 and eth1 for the AF_PACKET capture, you should use eth2 as management interface.
 
@@ -45,17 +45,17 @@ AF_HOME_NETWORK - the subnet of your network.
 
 AF_SETUP - DO NOT TOUCH THIS SETTINGS; OTHERWISE, YOUR SYSTEM WILL BE BROKEN.
 
-[h3]Reset the deployment[/h3]
+<h3>Reset the deployment</h3>
 
 When you want to reset the AF_PACKET deployment back to the smoothsec.first.setup environment, you just run the following command :
 
-[code]smoothsec.afpacket.reset[/code]
+<code>smoothsec.afpacket.reset</code>
 
 If you want to reset the box to the fresh install, you can run the following command then :
 
-[code]smoothsec.reset[/code]
+<code>smoothsec.reset</code>
 
-[h3]File Description[/h3]
+<h3>File Description</h3>
 
 smoothsec.afpacket.setup - This is a setup script for Suricata with AF_PACKET.  Please run smoothsec.first.setup before running this script.
                            This file is placed at /usr/local/sbin/.
