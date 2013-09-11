@@ -10,6 +10,7 @@
 ### END INIT INFO
 
 . /etc/smoothsec.cfg
+. /etc/afpacket.cfg
 
 case "$1" in
 start)
