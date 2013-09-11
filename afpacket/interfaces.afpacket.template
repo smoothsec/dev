@@ -14,12 +14,14 @@ iface af_iface_0 inet manual
 	up ifconfig af_iface_0 0.0.0.0 up
 	down ifconfig af_iface_0 down
 	post-up ethtool -K af_iface_0 gro off
+	post-up ethtool -K af_iface_0 lro off
 
 auto af_iface_1
 iface af_iface_1 inet manual
 	up ifconfig af_iface_1 0.0.0.0 up
 	down ifconfig af_iface_1 down
 	post-up ethtool -K af_iface_1 gro off
+	post-up ethtool -K af_iface_1 lro off
 
 auto af_manage_iface
 iface af_manage_iface inet static
