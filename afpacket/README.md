@@ -20,7 +20,7 @@ You need 3 network interface cards, such as eth0, eth1 and eth2.  If you want to
 
 router -- Smoothsec -- switch -- computers
 
-First of all, you need to run <code>smoothsec.first.setup</code> but no need to reboot.
+First of all, you need to run <code>smoothsec.first.setup</code> and then reboot.
 
 Make sure you are root.  Then run <code>smoothsec.afpacket.setup</code>.  A nano editor will be shown up with the <code>afpacket.cfg</code> file.
 
