@@ -1,0 +1,10 @@
+mkdir /usr/local/smoothsec/confs/bridge
+cp interfaces.bridge.template /usr/local/smoothsec/confs/bridge/
+cp bridge.template /usr/local/smoothsec/confs/bridge/
+cp smoothsec.bridge.reset /usr/local/sbin/
+cp smoothsec.bridge.setup /usr/local/sbin/
+cp sagan.template /usr/local/smoothsec/confs/bridge/
+cp suricata-bridge.template /usr/local/smoothsec/confs/bridge/
+cp sagan.conf.template /usr/local/smoothsec/confs/bridge/
+cp bridge.cfg /usr/local/smoothsec/confs/bridge/
+cp bridge.cfg /etc/
