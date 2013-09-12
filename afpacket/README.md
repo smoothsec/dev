@@ -16,7 +16,7 @@ The following scripts are for delopying Suricata (inline mode and IDS mode) and 
 
 <code>./smoothsec.afpacket.initialize</code>
 
-<h3>Delopying Suricata with AF_PACKET</h3>
+<h3>Delopying Snort/Suricata with AF_PACKET</h3>
 
 You need 3 network interface cards, such as eth0, eth1 and eth2.  If you want to use eth0 and eth1 for the AF_PACKET capture, you should use eth2 as management interface.
 
