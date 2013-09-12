@@ -84,6 +84,8 @@ smoothsec.afpacket.reset - This is a uninstall script for the purpose.  This fil
 
 afpacket.cfg - This is a configure file and it is placed at /etc/.
 
+interfaces.afpacket.snort.template - /etc/network/interface template file.  This file is placed at /usr/local/smoothsec/confs/afpacket/.
+
 interfaces.afpacket.template - /etc/network/interface template file.  This file is placed at /usr/local/smoothsec/confs/afpacket/.
 
 sagan.conf.template - /etc/sagan/sagan.conf template file.  This file is placed at /usr/local/smoothsec/confs/afpacket/.
