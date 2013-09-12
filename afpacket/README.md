@@ -73,6 +73,8 @@ one for Snort, one for Suricata and one for management.  However, they can be co
 
 Snorby web interface cannot show the dropped traffic at the moment.  If you want, please ask developers of Snorby to do so.
 
+Suricata inline mode requires new kernel, 3.7 or higher.  However, Snort inline mode does not.  Snort inline mode is more simple to deploy, in my opinion.
+
 <h3>File Description</h3>
 
 smoothsec.afpacket.setup - This is a setup script for Suricata with AF_PACKET.  Please run smoothsec.first.setup before running this script.
