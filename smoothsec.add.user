@@ -1,0 +1,21 @@
+#!/bin/bash
+#phillip.bailey@smoothsec.org
+echo ""
+echo "Add new SmoothSec users"
+echo ""
+echo "Enter a username for the new SmoothSec user. Your first name is a 
+reasonable choice. The username should start with a lower-case letter."
+echo ""
+read -p "Enter your username : " USER_ACCOUNT
+
+echo ""
+useradd $USER_ACCOUNT -m  --shell /bin/bash
+echo""
+echo "Select a password for the new SmoothSec user. A good password will contain
+a mixture of letters, numbers and punctuation.\n"
+passwd $USER_ACCOUNT
+cp  /usr/local/smoothsec/user_env/.bashrc /home/$USER_ACCOUNT/
+cp /usr/local/smoothsec/user_env/.vimrc /home/$USER_ACCOUNT/
+chown $USER_ACCOUNT.$USER_ACCOUNT /home/$USER_ACCOUNT/.bashrc
+chown $USER_ACCOUNT.$USER_ACCOUNT /home/$USER_ACCOUNT/.vimrc
+adduser $USER_ACCOUNT  sudo

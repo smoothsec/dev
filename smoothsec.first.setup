@@ -1,0 +1,50 @@
+#!/bin/bash
+#phillip.bailey@smoothsec.org
+clear
+echo -e "\033[1;33m*** Welcome to SmoothSec ***\033[0m\n"
+echo""
+echo "Available deployments:"
+echo""
+echo -e "\033[1;33mstandard\033[0m" "(All in one mode. [Snorby + Sensor])"
+echo""
+echo -e "\033[1;33mconsole \033[0m" "(Distributed. [Only Snorby web console])"
+echo""
+echo -e "\033[1;33msensor  \033[0m" "(Distributed. [Only sensor)"
+echo""
+echo -e "\033[1;33mips     \033[0m" "(IPS mode with af_packet)"
+echo""
+echo -e "\033[1;33mexit    \033[0m" "(If unsure.)"
+echo""
+
+read -p "Type here your favourite deployment : " MODE
+
+if [ $MODE == standard ]
+
+then
+
+    /usr/local/sbin/smoothsec.deploy.standard
+
+elif [ $MODE == 'console' ]
+
+then
+
+    /usr/local/sbin/smoothsec.deploy.console 
+
+elif [ $MODE == 'sensor' ]
+
+then 
+
+    /usr/local/sbin/smoothsec.deploy.sensor
+
+elif [ $MODE == 'ips' ]
+
+then
+
+    /usr/local/sbin/smoothsec.afpacket.setup
+
+
+else
+
+exit
+
+fi
