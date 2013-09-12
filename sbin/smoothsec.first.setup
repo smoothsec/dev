@@ -11,6 +11,8 @@ echo -e "\033[1;33mconsole \033[0m" "(Distributed. [Only Snorby web console])"
 echo""
 echo -e "\033[1;33msensor  \033[0m" "(Distributed. [Only sensor)"
 echo""
+echo -e "\033[1;33mips     \033[0m" "(IPS mode with af_packet)"
+echo""
 echo -e "\033[1;33mexit    \033[0m" "(If unsure.)"
 echo""
 
@@ -34,7 +36,13 @@ then
 
     /usr/local/sbin/smoothsec.deploy.sensor
 
-exit
+elif [ $MODE == 'ips' ]
+
+then
+
+    /usr/local/sbin/smoothsec.afpacket.setup
+
+
 else
 
 exit
