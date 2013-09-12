@@ -1,6 +1,0 @@
-dev
-===
-
-SmoothSec development.
-
-Scripts
