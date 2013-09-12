@@ -31,7 +31,7 @@ Just edit when necessary.
 
 AF_MODE - when deploying Suricata with AF_PACKET in IPS mode, you need to type ips while IDS mode you need to type tap.
 
-AF_ENGINE - you can select suricata or snort.  However, snort version is under development.
+AF_ENGINE - you can select either suricata or snort.
 
 AF_CORE - it will find out how many core of your CPU.
 
