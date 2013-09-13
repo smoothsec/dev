@@ -6,5 +6,6 @@ cp *.cleanlogs /usr/local/sbin/
 cp smoothsec.first.setup /usr/local/sbin/
 cp smoothsec.reset /usr/local/sbin/
 cp smoothsec.switch.engine /usr/local/sbin/
+cp afpacket.cfg /usr/local/smoothsec/confs/afpacket/
 
 cp afpacket.cfg /etc/
