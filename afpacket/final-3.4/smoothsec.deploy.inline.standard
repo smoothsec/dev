@@ -118,6 +118,8 @@ fi
 }
 
 # run the smoothsec.afpacket.standard.setup
+read -p "You are going to edit the configure file.  Ctl+o to save.  Ctl+x to exit.  Press Enter to continue." TEMP_VAR
+
 smoothsec.afpacket.standard.setup
 
 echo ""
