@@ -1,3 +1,10 @@
 mkdir /usr/local/smoothsec/confs/afpacket
-cp * /usr/local/smoothsec/confs/afpacket/
+cp *.template /usr/local/smoothsec/confs/afpacket/
+cp smoothsec.afpacket.* /usr/local/sbin/
+cp smoothsec.deploy.inline.* /usr/local/sbin/
+cp *.cleanlogs /usr/local/sbin/
+cp smoothsec.first.setup /usr/local/sbin/
+cp smoothsec.reset /usr/local/sbin/
+cp smoothsec.switch.engine /usr/local/sbin/
+
 cp afpacket.cfg /etc/
