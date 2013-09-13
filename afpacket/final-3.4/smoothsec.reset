@@ -16,7 +16,7 @@ SmoothSec as mmanagement console to view and classify
 if [ -f /etc/smoothsec.cfg ]; then
 	. /etc/smoothsec.cfg
 fi
-./etc/afpacket.cfg
+. /etc/afpacket.cfg
 
 cp /usr/local/smoothsec/rc.local.reset /etc/rc.local 
 chmod +x /etc/rc.local
@@ -24,7 +24,7 @@ chmod +x /etc/rc.local
 
 function reset_smoothsec() {
 
-if [ $DEPLOYMENT == standard ]
+if [ $DEPLOYMENT == "standard" ]
 then 
 echo "standard"
 echo "Stopping all the IDS/IPS/HIDS engines....."
@@ -69,7 +69,7 @@ rm -rf /etc/smoothsec.cfg
 usermod -p '$6$LASHtbhN$Ml0MpMkzWb.eUja25NuyEQR8RoaJqewcUxIK6XyKL/yVbfPl.vNENrCTLl7XaTeIBSa.iNXuoNxnJ2odhIRy11' root
 echo -e "\033[1;33mPlease reboot Smooth-sec typing:\033[0m  reboot\n"
 
-elif [ $DEPLOYMENT == console  ]
+elif [ $DEPLOYMENT == "console"  ]
 then
 echo "console"
 echo "Stopping all the HIDS engines....."
@@ -102,7 +102,7 @@ rm -rf /etc/smoothsec.cfg
 usermod -p '$6$LASHtbhN$Ml0MpMkzWb.eUja25NuyEQR8RoaJqewcUxIK6XyKL/yVbfPl.vNENrCTLl7XaTeIBSa.iNXuoNxnJ2odhIRy11' root
 echo -e "\033[1;33mPlease reboot Smooth-sec typing:\033[0m  reboot\n"
 
-elif [ $DEPLOYMENT == sensor  ]
+elif [ $DEPLOYMENT == "sensor"  ]
 then
 echo "sensor"
 echo "Stopping all the IDS/IPS/HIDS engines....."
