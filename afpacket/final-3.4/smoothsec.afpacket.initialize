@@ -9,3 +9,7 @@ cp smoothsec.switch.engine /usr/local/sbin/
 cp afpacket.cfg /usr/local/smoothsec/confs/afpacket/
 
 cp afpacket.cfg /etc/
+
+cp tunnel.template /etc/init.d/tunnel
+
+rm /usr/local/sbin/smoothsec.afpacket.initialize
