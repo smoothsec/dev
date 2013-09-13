@@ -7,22 +7,22 @@ else
 fi
 
 # check if running IPS Mode or not
-if [ $AF_SETUP == 'yes" ]; then
+if [ $AF_SETUP == "yes" ]; then
 	echo""
 	echo "You are currently running $AF_ENGINE IPS mode."
 	echo "You can not switch.  Unless you reset it."
 	exit
-elif [ $ENGINE == "" ]; then
+elif [ -z "$ENGINE" ]; then
 	echo ""
 	echo "IDS/IPS not yet setup."
 	exit
 fi
 
-if  [ $ENGINE == "snort" ]
+if  [ $ENGINE == "snort" ];
 then
 echo""
 echo "You are currently running snort IDS"
-PS3='Please enter your choice (type 1 for Suricata or 2 for both [Suricata+Snort]):'                                                                  
+PS3='Please enter your choice (type 1 for Suricata or 2 for both [Suricata+Snort]):'
 options=("suricata" "both")
 
 select opt in "${options[@]}"
