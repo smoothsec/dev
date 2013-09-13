@@ -40,7 +40,7 @@ if [ "$AF_ENGINE" == "suricata" ]; then
 	mv /etc/suricata/suricata-afpacket.yaml /etc/suricata/suricata.yaml
 
 	if [ $DEPLOYMENT == "console" ]; then
-		# do nothing
+		echo ""
 	else
 		cp /usr/local/smoothsec/confs/afpacket/interfaces.afpacket.template /etc/network/interfaces.afpacket
 		sed -i "s|af_iface_0|$AF_IFACE_0|" /etc/network/interfaces.afpacket
@@ -74,7 +74,7 @@ elif [ "$AF_ENGINE" == "snort" ]; then
 	cp /usr/local/smoothsec/confs/afpacket/sagan.template /etc/init.d/sagan
 
 	if [ $DEPLOYMENT == "console" ]; then
-		# do nothing
+		echo ""
 	else
 		cp /usr/local/smoothsec/confs/afpacket/interfaces.afpacket.snort.template /etc/network/interfaces.afpacket
 		sed -i "s|af_iface_0|$AF_IFACE_0|" /etc/network/interfaces.afpacket
