@@ -55,7 +55,7 @@ if [ "$AF_ENGINE" == "suricata" ]; then
 	cp /usr/local/smoothsec/confs/afpacket/suricata-afpacket.template /etc/init.d/suricata
 	cp /usr/local/smoothsec/confs/afpacket/sagan.template /etc/init.d/sagan
 
-	sedi -i "s|#interface = eth0|interface = $AF_IFACE_0|" /etc/arpalert/arpalert.conf
+	sed -i "s|#interface = eth0|interface = $AF_IFACE_0|" /etc/arpalert/arpalert.conf
 	
 	update-rc.d suricata defaults > /dev/null 2>&1
 	update-rc.d sagan defaults > /dev/null 2>&1
@@ -81,7 +81,7 @@ elif [ "$AF_ENGINE" == "snort" ]; then
 	cp /usr/local/smoothsec/confs/afpacket/snort-afpacket.template /etc/init.d/snort
 
 	sed -i "s|demo.snorby.org|$AF_SENSOR_IP|" /var/www/snorby/config/snorby_config.yml
-	sedi -i "s|#interface = eth0|interface = $AF_IFACE_0|" /etc/arpalert/arpalert.conf
+	sed -i "s|#interface = eth0|interface = $AF_IFACE_0|" /etc/arpalert/arpalert.conf
 
 	update-rc.d snort defaults > /dev/null 2>&1
 	update-rc.d sagan defaults > /dev/null 2>&1
