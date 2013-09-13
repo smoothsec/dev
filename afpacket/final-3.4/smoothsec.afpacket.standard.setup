@@ -39,13 +39,17 @@ if [ "$AF_ENGINE" == "suricata" ]; then
 	sed -i "s|af_core|$AF_CORE|" /etc/suricata/suricata-afpacket.yaml
 	mv /etc/suricata/suricata-afpacket.yaml /etc/suricata/suricata.yaml
 
-	cp /usr/local/smoothsec/confs/afpacket/interfaces.afpacket.template /etc/network/interfaces.afpacket
-	sed -i "s|af_iface_0|$AF_IFACE_0|" /etc/network/interfaces.afpacket
-	sed -i "s|af_iface_1|$AF_IFACE_1|" /etc/network/interfaces.afpacket
-	sed -i "s|af_manage_iface|$AF_MANAGE_IFACE|" /etc/network/interfaces.afpacket
-	sed -i "s|af_sensor_ip|$AF_SENSOR_IP|" /etc/network/interfaces.afpacket
-	sed -i "s|af_gateway|$AF_GATEWAY|" /etc/network/interfaces.afpacket
-	mv /etc/network/interfaces.afpacket /etc/network/interfaces
+	if [ $DEPLOYMENT == "console" ]; then
+		# do nothing
+	else
+		cp /usr/local/smoothsec/confs/afpacket/interfaces.afpacket.template /etc/network/interfaces.afpacket
+		sed -i "s|af_iface_0|$AF_IFACE_0|" /etc/network/interfaces.afpacket
+		sed -i "s|af_iface_1|$AF_IFACE_1|" /etc/network/interfaces.afpacket
+		sed -i "s|af_manage_iface|$AF_MANAGE_IFACE|" /etc/network/interfaces.afpacket
+		sed -i "s|af_sensor_ip|$AF_SENSOR_IP|" /etc/network/interfaces.afpacket
+		sed -i "s|af_gateway|$AF_GATEWAY|" /etc/network/interfaces.afpacket
+		mv /etc/network/interfaces.afpacket /etc/network/interfaces
+	fi
 
 	cp /usr/local/smoothsec/confs/afpacket/sagan.conf.template /etc/sagan/sagan-afpacket.conf
 	sed -i "s|anynet|$AF_SENSOR_IP|" /etc/sagan/sagan-afpacket.conf
@@ -69,15 +73,19 @@ elif [ "$AF_ENGINE" == "snort" ]; then
 
 	cp /usr/local/smoothsec/confs/afpacket/sagan.template /etc/init.d/sagan
 
-	cp /usr/local/smoothsec/confs/afpacket/interfaces.afpacket.snort.template /etc/network/interfaces.afpacket
-	sed -i "s|af_iface_0|$AF_IFACE_0|" /etc/network/interfaces.afpacket
-	sed -i "s|af_iface_1|$AF_IFACE_1|" /etc/network/interfaces.afpacket
-	#sed -i "s|0.0.0.0|promisc|" /etc/network/interfaces.afpacket
-	sed -i "s|af_manage_iface|$AF_MANAGE_IFACE|" /etc/network/interfaces.afpacket
-	sed -i "s|af_sensor_ip|$AF_SENSOR_IP|" /etc/network/interfaces.afpacket
-	sed -i "s|af_gateway|$AF_GATEWAY|" /etc/network/interfaces.afpacket
-	mv /etc/network/interfaces.afpacket /etc/network/interfaces
-
+	if [ $DEPLOYMENT == "console" ]; then
+		# do nothing
+	else
+		cp /usr/local/smoothsec/confs/afpacket/interfaces.afpacket.snort.template /etc/network/interfaces.afpacket
+		sed -i "s|af_iface_0|$AF_IFACE_0|" /etc/network/interfaces.afpacket
+		sed -i "s|af_iface_1|$AF_IFACE_1|" /etc/network/interfaces.afpacket
+		#sed -i "s|0.0.0.0|promisc|" /etc/network/interfaces.afpacket
+		sed -i "s|af_manage_iface|$AF_MANAGE_IFACE|" /etc/network/interfaces.afpacket
+		sed -i "s|af_sensor_ip|$AF_SENSOR_IP|" /etc/network/interfaces.afpacket
+		sed -i "s|af_gateway|$AF_GATEWAY|" /etc/network/interfaces.afpacket
+		mv /etc/network/interfaces.afpacket /etc/network/interfaces
+	fi
+	
 	cp /usr/local/smoothsec/confs/afpacket/snort-afpacket.template /etc/init.d/snort
 
 	sed -i "s|demo.snorby.org|$AF_SENSOR_IP|" /var/www/snorby/config/snorby_config.yml
