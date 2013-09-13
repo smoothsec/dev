@@ -1,4 +1,6 @@
-. /etc/smoothsec.cfg
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+fi
 . /etc/afpacket.cfg
 
 
