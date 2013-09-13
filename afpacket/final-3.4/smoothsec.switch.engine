@@ -1,14 +1,20 @@
 #!/bin/bash
 
-
-. /etc/smoothsec.cfg
-. /etc/afpacket.cfg
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+else
+	. /etc/afpacket.cfg
+fi
 
 # check if running IPS Mode or not
 if [ $AF_SETUP == 'yes" ]; then
 	echo""
 	echo "You are currently running $AF_ENGINE IPS mode."
 	echo "You can not switch.  Unless you reset it."
+	exit
+elif [ $ENGINE == "" ]; then
+	echo ""
+	echo "IDS/IPS not yet setup."
 	exit
 fi
 
