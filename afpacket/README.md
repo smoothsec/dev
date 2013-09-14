@@ -24,6 +24,7 @@ AF_ENGINE - Select snort or suricata (default is snort)
 
 RULES - et or vrt (default is et, if you select vrt you need get the code to operate)
 
+
 - This section may require to edit when setting up Standard and Distributed (Sensor)
 
 AF_IFACE_0 - One of the AF_PACKET capture interfaces, default is eth0
@@ -32,9 +33,10 @@ AF_IFACE_1 - The other AF_PACKET capture interfaces, default is eth1
 
 AF_MANAGE_IFACE - The interface to manage the IPS, default is eth2
 
+
 - This section may require to edit when setting up Standard and Distributed (Console & Sensor)
 
-AF_SENSOR_IP - The sensor IP address, which is also the IP address of AF_MANAGE_IFACE
+AF_SENSOR_IP - The sensor IP address, which is also the IP address of AF_MANAGE_IFACE and Console IP address
 
 AF_GATEWAY - The gateway of the AF_SENSOR_IP (or AF_MANAGE_IFACE) network
 
