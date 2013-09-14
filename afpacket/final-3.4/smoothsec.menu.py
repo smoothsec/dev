@@ -20,6 +20,14 @@ def internet_check():
 #		print "To continue without internet connectivity comment '#' the function at line 666.\n"
 		sys.exit()
 		
+def clear():
+	if subprocess.Popen("clear",shell=True).wait() == 0:
+		print ""
+	else:
+		print "\n"
+		print " [>] Failed to clear screen.\n"
+
+
 #----------------------------------- Update functions!
 
 def debian_update():
@@ -203,10 +211,12 @@ def ids_menu():
 
 	if len(choice) > 4:
 		tryharder()
+		clear()
 		ids_menu()
 	elif choice == "1":
 		try:
 			ids_standard()
+			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -215,6 +225,7 @@ def ids_menu():
 	elif choice == "2":
 		try:
 			ids_dist_console()
+			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -223,6 +234,7 @@ def ids_menu():
 	elif choice == "3":
 		try:
 			ids_dist_sensor()
+			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -231,6 +243,7 @@ def ids_menu():
 	elif choice == "A":
 		try:
 			switch_engine()
+			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -239,6 +252,7 @@ def ids_menu():
 	elif choice == "!?@":
 		try:
 			reset()
+			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -247,9 +261,11 @@ def ids_menu():
 	elif choice == "x":
 		print "\n [>] Exiting!\n"
 		sleep(1)
-		sys.exit()
+		clear()
+		main_menu()
 	else:
 		tryharder()
+		clear()
 		ids_menu()
 
 
@@ -275,10 +291,12 @@ def ips_menu():
 
 	if len(choice) > 4:
 		tryharder()
+		clear()
 		ips_menu()
 	elif choice == "1":
 		try:
 			ips_standard()
+			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -287,6 +305,7 @@ def ips_menu():
 	elif choice == "2":
 		try:
 			ips_dist_console()
+			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -295,6 +314,7 @@ def ips_menu():
 	elif choice == "3":
 		try:
 			ips_dist_sensor()
+			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -303,6 +323,7 @@ def ips_menu():
 	elif choice == "A":
 		try:
 			switch_engine()
+			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -311,6 +332,7 @@ def ips_menu():
 	elif choice == "!?@":
 		try:
 			reset()
+			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -319,9 +341,11 @@ def ips_menu():
 	elif choice == "x":
 		print "\n [>] Exiting!\n"
 		sleep(1)
-		sys.exit()
+		clear()
+		main_menu()
 	else:
 		tryharder()
+		clear()
 		ips_menu()
 
 
@@ -343,10 +367,12 @@ def rules_menu():
 
 	if len(choice) > 2:
 		tryharder()
+		clear()
 		rules_menu()
 	elif choice == "1":
 		try:
 			snort_rules_update()
+			clear()
 			rules_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -355,6 +381,7 @@ def rules_menu():
 	elif choice == "2":
 		try:
 			suricata_rules_update()
+			clear()
 			rules_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -364,6 +391,7 @@ def rules_menu():
 		try:
 			snort_rules_update()
 			suricata_rules_update()
+			clear()
 			rules_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -372,9 +400,11 @@ def rules_menu():
 	elif choice == "x":
 		print "\n [>] Exiting!\n"
 		sleep(1)
-		sys.exit()
+		clear()
+		main_menu()
 	else:
 		tryharder()
+		clear()
 		rules_menu()
 
 
@@ -409,10 +439,12 @@ def menu_main():
 	
 	if len(choice) > 2:
 		tryharder()
+		clear()
 		menu_main()
 	elif choice == "1":
 		try:
 			debian_update()
+			clear()
 			menu_main()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -420,7 +452,9 @@ def menu_main():
 			sys.exit()
 	elif choice == "2":
 		try:
+			clear()
 			ids_menu()
+			clear()
 			menu_main()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -428,7 +462,9 @@ def menu_main():
 			sys.exit()
 	elif choice == "3":
 		try:
+			clear()
 			ips_menu()
+			clear()
 			menu_main()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -436,7 +472,9 @@ def menu_main():
 			sys.exit()
 	elif choice == "4":
 		try:
+			clear()
 			rules_menu()
+			clear()
 			menu_main()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -455,6 +493,7 @@ def menu_main():
 		sys.exit()
 	else:
 		tryharder()
+		clear()
 		menu_main()
 
 internet_check()
