@@ -5,6 +5,7 @@ The folder contents all files for Snort/Suricata Inline mode with AF_PACKET.
 <h3>Features</h3>
 
 Standard - Web Console and Sensor in one box
+
 Distributed - One Web Console and many Sensors in the network
 
 Easy to configure and deploy.  Working on phyiscal hardware and virtual machines.
@@ -20,16 +21,23 @@ Three network interfaces are required to this setup.  If you are running SmoothS
 You may need to change the following values when setting up the IPS :
 
 AF_ENGINE - Select snort or suricata (default is snort)
+
 RULES - et or vrt (default is et, if you select vrt you need get the code to operate)
 
-# This section may require to edit when setting up Standard and Distributed (Sensor)
+- This section may require to edit when setting up Standard and Distributed (Sensor)
+
 AF_IFACE_0 - One of the AF_PACKET capture interfaces, default is eth0
+
 AF_IFACE_1 - The other AF_PACKET capture interfaces, default is eth1
+
 AF_MANAGE_IFACE - The interface to manage the IPS, default is eth2
 
-# This section may require to edit when setting up Standard and Distributed (Console & Sensor)
+- This section may require to edit when setting up Standard and Distributed (Console & Sensor)
+
 AF_SENSOR_IP - The sensor IP address, which is also the IP address of AF_MANAGE_IFACE
+
 AF_GATEWAY - The gateway of the AF_SENSOR_IP (or AF_MANAGE_IFACE) network
+
 AF_HOME_NETWORK - The subnet of AF_SENSOR_IP
 
 The editor to edit the config file is namely nano.  You can save the content with 
