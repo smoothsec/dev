@@ -179,6 +179,7 @@ def script_update():
 	
 	subprocess.Popen("wget https://raw.github.com/smoothsec/dev/samiux/afpacket/final-3.4/smoothsec.menu.py",shell=True).wait()
 	subprocess.Popen("chmod a+x smoothsec.menu.py",shell=True).wait()
+	subprocess.Popen("mv smoothsec.menu.py /usr/local/sbin/",shell=True).wait()
 	print "\n"
 	print " [>] Update successfully, now please run the script again!\n"
 	sleep(2)
@@ -193,6 +194,7 @@ def tryharder():
 
 def ids_menu():
 
+	clear()
 	header()
 	print " IDS Installation Menu\n"
 	print " [>] 1. Standard (Web Console + Senors)"
@@ -211,12 +213,10 @@ def ids_menu():
 
 	if len(choice) > 4:
 		tryharder()
-		clear()
 		ids_menu()
 	elif choice == "1":
 		try:
 			ids_standard()
-			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -225,7 +225,6 @@ def ids_menu():
 	elif choice == "2":
 		try:
 			ids_dist_console()
-			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -234,7 +233,6 @@ def ids_menu():
 	elif choice == "3":
 		try:
 			ids_dist_sensor()
-			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -243,7 +241,6 @@ def ids_menu():
 	elif choice == "A":
 		try:
 			switch_engine()
-			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -252,7 +249,6 @@ def ids_menu():
 	elif choice == "!?@":
 		try:
 			reset()
-			clear()
 			ids_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -261,11 +257,9 @@ def ids_menu():
 	elif choice == "x":
 		print "\n [>] Exiting!\n"
 		sleep(1)
-		clear()
-		main_menu()
+		menu_main()
 	else:
 		tryharder()
-		clear()
 		ids_menu()
 
 
@@ -273,6 +267,7 @@ def ids_menu():
 
 def ips_menu():
 
+	clear()
 	header()
 	print " IPS Installation Menu\n"
 	print " [>] 1. Standard (Web Console + Senors)"
@@ -291,12 +286,10 @@ def ips_menu():
 
 	if len(choice) > 4:
 		tryharder()
-		clear()
 		ips_menu()
 	elif choice == "1":
 		try:
 			ips_standard()
-			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -305,7 +298,6 @@ def ips_menu():
 	elif choice == "2":
 		try:
 			ips_dist_console()
-			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -314,7 +306,6 @@ def ips_menu():
 	elif choice == "3":
 		try:
 			ips_dist_sensor()
-			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -323,7 +314,6 @@ def ips_menu():
 	elif choice == "A":
 		try:
 			switch_engine()
-			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -332,7 +322,6 @@ def ips_menu():
 	elif choice == "!?@":
 		try:
 			reset()
-			clear()
 			ips_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -341,16 +330,15 @@ def ips_menu():
 	elif choice == "x":
 		print "\n [>] Exiting!\n"
 		sleep(1)
-		clear()
-		main_menu()
+		menu_main()
 	else:
 		tryharder()
-		clear()
 		ips_menu()
 
 
 def rules_menu():
 
+	clear()
 	header()
 	print " Rules Menu\n"
 	print " [>] 1. Update Snort Rules"
@@ -367,12 +355,10 @@ def rules_menu():
 
 	if len(choice) > 2:
 		tryharder()
-		clear()
 		rules_menu()
 	elif choice == "1":
 		try:
 			snort_rules_update()
-			clear()
 			rules_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -381,7 +367,6 @@ def rules_menu():
 	elif choice == "2":
 		try:
 			suricata_rules_update()
-			clear()
 			rules_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -391,7 +376,6 @@ def rules_menu():
 		try:
 			snort_rules_update()
 			suricata_rules_update()
-			clear()
 			rules_menu()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -400,11 +384,9 @@ def rules_menu():
 	elif choice == "x":
 		print "\n [>] Exiting!\n"
 		sleep(1)
-		clear()
-		main_menu()
+		menu_main()
 	else:
 		tryharder()
-		clear()
 		rules_menu()
 
 
@@ -420,6 +402,7 @@ def header():
 
 def menu_main():
 	
+	clear()
 	header()
 	print "			MAIN MENU\n"
         print " [>] 1. Update and clean Debian Server."
@@ -439,12 +422,10 @@ def menu_main():
 	
 	if len(choice) > 2:
 		tryharder()
-		clear()
 		menu_main()
 	elif choice == "1":
 		try:
 			debian_update()
-			clear()
 			menu_main()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -452,9 +433,7 @@ def menu_main():
 			sys.exit()
 	elif choice == "2":
 		try:
-			clear()
 			ids_menu()
-			clear()
 			menu_main()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -462,9 +441,7 @@ def menu_main():
 			sys.exit()
 	elif choice == "3":
 		try:
-			clear()
 			ips_menu()
-			clear()
 			menu_main()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -472,9 +449,7 @@ def menu_main():
 			sys.exit()
 	elif choice == "4":
 		try:
-			clear()
 			rules_menu()
-			clear()
 			menu_main()
 		except KeyboardInterrupt:
 			print "\n [>] Exiting!\n"
@@ -493,8 +468,8 @@ def menu_main():
 		sys.exit()
 	else:
 		tryharder()
-		clear()
 		menu_main()
+
 
 internet_check()
 menu_main()
