@@ -1,9 +1,0 @@
-#!/usr/bin/bash
-
-# Update script for Debian 7 (Wheezy) - based operating system 
-# but not SmoothSec
-
-apt-get update
-apt-get dist-upgrade
-apt-get --purge autoclean
-apt-get --purge autoremove
