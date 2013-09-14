@@ -52,7 +52,8 @@ chown $USER_ACCOUNT.$USER_ACCOUNT /home/$USER_ACCOUNT/.vimrc
 adduser $USER_ACCOUNT  sudo
 
 #echo "SENSOR_USER=$USER_ACCOUNT"  >> /etc/smoothsec.cfg
-sed -i "s|SENSOR_USER=none|SENSOR_USER=$USER_ACCOUNT" /etc/afpacket.cfg
+
+sed -i "s|SENSOR_USER=none|SENSOR_USER=$USER_ACCOUNT|" /etc/afpacket.cfg
 
 echo""
 echo -e "\033[1;33mSSH Console<>Sensor tunnel setup.\033[0m\n" 
