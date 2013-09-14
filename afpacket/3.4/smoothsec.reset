@@ -1,0 +1,177 @@
+#!/bin/bash                                                                                                                           
+#phillip.bailey@smoothsec.org
+#samiux@smoothsec.org
+
+clear
+echo""
+echo -e "\033[1;33m*** Welcome to SmoothSec Reset Wizard ***\n
+The setup wizard will guide you to configure and deploy
+SmoothSec as mmanagement console to view and classify 
+3.Set management interface.
+4.Set Snorby web interface username and password.
+5.Snorby automatic database setup.\033[0m"
+
+#add crontabs
+
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+fi
+. /etc/afpacket.cfg
+
+cp /usr/local/smoothsec/rc.local.reset /etc/rc.local 
+chmod +x /etc/rc.local
+#rm /etc/smoothsec.cfg > /dev/null 2>&1
+
+function reset_smoothsec() {
+
+if [ $DEPLOYMENT == "standard" ]
+then 
+echo "standard"
+echo "Stopping all the IDS/IPS/HIDS engines....."
+/etc/init.d/snort stop > /dev/null 2>&1
+/etc/init.d/suricata stop > /dev/null 2>&1
+/etc/init.d/sagan stop > /dev/null 2>&1
+/etc/init.d/arpalert stop > /dev/null 2>&1
+update-rc.d -f suricata remove > /dev/null 2>&1 
+update-rc.d -f snort remove > /dev/null 2>&1
+update-rc.d -f sagan remove > /dev/null 2>&1
+update-rc.d -f arpalert remove > /dev/null 2>&1
+update-rc.d -f snorby remove > /dev/null 2>&1
+update-rc.d -f apache remove > /dev/null 2>&1
+echo "Deleting the log files"
+rm -rf /var/log/snort  
+rm -rf /var/log/sagan  
+rm -rf /usr/local/var/log/suricata
+rm -rf /var/log/suricata 
+mkdir -p /usr/local/var/log/suricata
+ln -s /usr/local/var/log/suricata /var/log/suricata
+mkdir -p /var/log/snort/processed
+mkdir -p /var/log/sagan/processed
+mkdir -p /var/log/suricata/processed
+chown -R sagan /var/log/sagan/
+chown snort /var/log/snort/
+chown suricata /var/log/suricata
+echo "Resetting Debian sources file"
+rm /etc/apt/sources.list.d/smoothsec.list
+echo "Resetting crotabs"
+crontab /usr/local/smoothsec/cronempty
+echo "Dropping Snorby database"
+mysqladmin -uroot -ptoor drop snorby
+cp /usr/local/smoothsec/confs/arpalert.conf /etc/arpalert/
+cp /usr/local/smoothsec/confs/sagan.conf /etc/sagan/
+cp /usr/local/smoothsec/confs/snort.conf /etc/snort/
+cp /usr/local/smoothsec/confs/suricata.yaml /etc/suricata/
+cp /usr/local/smoothsec/confs/seeds.rb /var/www/snorby/db/
+cp /usr/local/smoothsec/confs/snorby_config.yml /var/www/snorby/config/
+chown www-data.www-data /var/www/snorby/db/seeds.rb 
+rm /var/lib/arpalert/arpalert.leases > /dev/null 2>&1
+rm -rf /etc/smoothsec.cfg
+usermod -p '$6$LASHtbhN$Ml0MpMkzWb.eUja25NuyEQR8RoaJqewcUxIK6XyKL/yVbfPl.vNENrCTLl7XaTeIBSa.iNXuoNxnJ2odhIRy11' root
+echo -e "\033[1;33mPlease reboot Smooth-sec typing:\033[0m  reboot\n"
+
+elif [ $DEPLOYMENT == "console"  ]
+then
+echo "console"
+echo "Stopping all the HIDS engines....."
+/etc/init.d/sagan stop > /dev/null 2>&1
+/etc/init.d/arpalert stop > /dev/null 2>&1
+update-rc.d -f sagan remove > /dev/null 2>&1
+update-rc.d -f arpalert remove > /dev/null 2>&1
+update-rc.d -f snorby remove > /dev/null 2>&1
+update-rc.d -f apache remove > /dev/null 2>&1
+echo "Resetting Debian sources file"
+rm /etc/apt/sources.list.d/smoothsec.list
+echo "Resetting crotabs"
+crontab /usr/local/smoothsec/cronempty
+echo "Dropping Snorby database"
+mysqladmin -uroot -ptoor drop snorby
+/etc/init.d/mysql stop
+rm -rf /var/log/sagan
+mkdir -p /var/log/sagan/processed
+chown -R sagan /var/log/sagan/
+
+cp /usr/local/smoothsec/confs/arpalert.conf /etc/arpalert/
+cp /usr/local/smoothsec/confs/sagan.conf /etc/sagan/
+cp /usr/local/smoothsec/confs/snort.conf /etc/snort/
+cp /usr/local/smoothsec/confs/suricata.yaml /etc/suricata/
+cp /usr/local/smoothsec/confs/seeds.rb /var/www/snorby/db/
+cp /usr/local/smoothsec/confs/snorby_config.yml /var/www/snorby/config/
+chown www-data.www-data /var/www/snorby/db/seeds.rb 
+rm /var/lib/arpalert/arpalert.leases > /dev/null 2>&1
+rm -rf /etc/smoothsec.cfg
+usermod -p '$6$LASHtbhN$Ml0MpMkzWb.eUja25NuyEQR8RoaJqewcUxIK6XyKL/yVbfPl.vNENrCTLl7XaTeIBSa.iNXuoNxnJ2odhIRy11' root
+echo -e "\033[1;33mPlease reboot Smooth-sec typing:\033[0m  reboot\n"
+
+elif [ $DEPLOYMENT == "sensor"  ]
+then
+echo "sensor"
+echo "Stopping all the IDS/IPS/HIDS engines....."
+killall -9 autossh
+/etc/init.d/snort stop > /dev/null 2>&1
+/etc/init.d/suricata stop > /dev/null 2>&1
+/etc/init.d/sagan stop > /dev/null 2>&1
+/etc/init.d/arpalert stop > /dev/null 2>&1
+update-rc.d -f tunnel remove > /dev/null 2>&1 
+update-rc.d -f suricata remove > /dev/null 2>&1 
+update-rc.d -f snort remove > /dev/null 2>&1
+update-rc.d -f sagan remove > /dev/null 2>&1
+update-rc.d -f arpalert remove > /dev/null 2>&1
+echo "Deleting the log files"
+rm -rf /var/log/snort  
+rm -rf /var/log/sagan  
+rm -rf /usr/local/var/log/suricata
+rm -rf /var/log/suricata 
+mkdir -p /usr/local/var/log/suricata
+ln -s /usr/local/var/log/suricata /var/log/suricata
+mkdir -p /var/log/snort/processed
+mkdir -p /var/log/sagan/processed
+mkdir -p /var/log/suricata/processed
+chown -R sagan /var/log/sagan/
+chown snort /var/log/snort/
+chown suricata /var/log/suricata
+echo "Resetting Debian sources file"
+rm /etc/apt/sources.list.d/smoothsec.list
+echo "Resetting crotabs"
+crontab /usr/local/smoothsec/cronempty
+cp /usr/local/smoothsec/confs/arpalert.conf /etc/arpalert/
+cp /usr/local/smoothsec/confs/sagan.conf /etc/sagan/
+cp /usr/local/smoothsec/confs/snort.conf /etc/snort/
+cp /usr/local/smoothsec/confs/suricata.yaml /etc/suricata/
+cp /usr/local/smoothsec/confs/seeds.rb /var/www/snorby/db/
+cp /usr/local/smoothsec/confs/snorby_config.yml /var/www/snorby/config/
+chown www-data.www-data /var/www/snorby/db/seeds.rb 
+rm /var/lib/arpalert/arpalert.leases > /dev/null 2>&1
+rm -rf /etc/smoothsec.cfg
+usermod -p '$6$LASHtbhN$Ml0MpMkzWb.eUja25NuyEQR8RoaJqewcUxIK6XyKL/yVbfPl.vNENrCTLl7XaTeIBSa.iNXuoNxnJ2odhIRy11' root
+echo -e "\033[1;33mPlease reboot Smooth-sec typing:\033[0m  reboot\n"
+
+fi
+
+}
+
+
+read -p "Type here your (Yes/No) : " RESET
+
+if [ $RESET == Yes ]
+
+then
+
+echo "yes"
+
+reset_smoothsec
+smoothsec.afpacket.reset
+
+elif [ $RESET == 'No' ]
+
+then
+echo "no"
+
+exit 0
+
+else
+
+echo "Invalid Input"
+
+fi                
+
+
