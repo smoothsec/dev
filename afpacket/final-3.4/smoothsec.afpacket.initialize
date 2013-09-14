@@ -12,6 +12,6 @@ cp afpacket.cfg /etc/
 
 cp tunnel.template /etc/init.d/tunnel
 
-cp *.py /usr/local/sbin/
+cp smoothsec.menu /usr/local/sbin/
 
 rm /usr/local/sbin/smoothsec.afpacket.initialize
