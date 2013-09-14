@@ -383,9 +383,9 @@ def rules_menu():
 
 def header():
   
-	print "\n SmoothSec - Detection Made Simple"
-	print "    http://wwww.smoothsec.org"
-	print "Script Version : 0.1 (Sept 14, 2013)"
+	print "\n SmoothSec - Intrusion Detection Made Simple"
+	print "           http://wwww.smoothsec.org"
+	print "       Script Version : 0.1 (Sept 14, 2013)"
 	print "\n"
 
 def menu_main():
