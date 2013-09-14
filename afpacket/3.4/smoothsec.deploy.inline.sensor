@@ -1,0 +1,124 @@
+#!/bin/bash
+#phillip.bailey@smoothsec.org
+#samiux@smoothsec.org
+
+clear
+echo""
+echo -e "\033[1;33m*** Welcome to SmoothSec Inline Mode Setup Wizard [Sensor Only]***\n
+The setup wizard will guide you to configure SmoothSec
+for the first time. Please follow the setup wizard step
+by step to complete the basic configuration.\n
+
+The Wizard will guide you  through the following steps:
+1.Set root password for local login.(NO SSH LOGIN FOR ROOT.)
+2.Set SmoothSec user account and  password.(SSH and SUDO ALLOWED.)
+3.Generate the SSH key pair and copy it to the SmoothSec (Snorby) console.
+4.Edit configure file.
+5.Configure the Local Area Network.\033[0m"
+
+echo""
+echo -e "\033[1;31mChanging root password -  Please choose a strong one!\033[0m\n"
+/usr/bin/passwd
+EXIT=$?
+
+if [[ $EXIT != 0 ]]; then
+	echo "EXIT"
+	exit
+fi
+
+echo ""
+echo -e "\033[1;33mSmoothSec user setup\033[0m\n" 
+echo "Enter a username for the new SmoothSec sensor user. Your first name
+is a reasonable choice. The username should start with a lower-case letter."
+echo""
+read -p "Enter your username : " USER_ACCOUNT
+echo ""
+useradd $USER_ACCOUNT -m  --shell /bin/bash
+echo""
+echo "Select a password for the new SmoothSec user. A good password will
+contain a mixture of letters, numbers and punctuation."
+echo ""
+passwd $USER_ACCOUNT
+
+if [ "$?" -ne "0" ]; then
+      passwd $USER_ACCOUNT  
+fi
+
+
+cp  /usr/local/smoothsec/user_env/.bashrc /home/$USER_ACCOUNT/
+cp /usr/local/smoothsec/user_env/.vimrc /home/$USER_ACCOUNT/
+chown $USER_ACCOUNT.$USER_ACCOUNT /home/$USER_ACCOUNT/.bashrc
+chown $USER_ACCOUNT.$USER_ACCOUNT /home/$USER_ACCOUNT/.vimrc
+adduser $USER_ACCOUNT  sudo
+
+#echo "SENSOR_USER=$USER_ACCOUNT"  >> /etc/smoothsec.cfg
+
+sed -i "s|SENSOR_USER=none|SENSOR_USER=$USER_ACCOUNT|" /etc/afpacket.cfg
+
+echo""
+echo -e "\033[1;33mSSH Console<>Sensor tunnel setup.\033[0m\n" 
+read -p "Please enter SmoothSec (Snorby) console IP ADDRESS. : " CONSOLE_IP
+echo""
+read -p "Please enter SmoothSec (Snorby) console user. : " CONSOLE_USER
+
+sed -i "s|CONSOLE_IP=192.168.1.180|CONSOLE_IP=$CONSOLE_IP|" /etc/afpacket.cfg
+sed -i "s|CONSOLE_USER=console|CONSOLE_USER=$CONSOLE_USER|" /etc/afpacket.cfg
+
+read -p "You are going to edit the configure file.  Ctl+o to save.  Ctl+x to exit.  Press Enter to continue." TEMP_VAR
+echo""
+
+# run smoothsec.afpacket.standard.setup
+smoothsec.afpacket.standard.setup
+
+echo""
+echo -e "\033[1;33mGenerating public/private rsa key pair.\n
+
+This is required in order to establish
+an encrypted tunnel with Snorby console. 
+
+PLEASE JUST PRESS ENTER, do not enter any Password\033[0m\n"
+su - $USER_ACCOUNT -c "ssh-keygen -t rsa"
+
+sed -i "s|DEPLOYMENT=none|DEPLOYMENT=sensor|" /etc/afpacket.cfg
+#sed -i "s|CONSOLE_USER=console|$CONSOLE_USER|" /etc/afpacket.cfg
+
+echo -e "\033[1;33mCopying the SSH public key to the Snorby Console server [ $CONSOLE_IP ]\033[0m\n"
+echo""
+echo -e "\033[1;33mYou need to enter the password for the user: $CONSOLE_USER on: $CONSOLE_IP host.\033[0m\n"
+
+ssh-copy-id -i /home/$USER_ACCOUNT/.ssh/id_rsa.pub $CONSOLE_USER@$CONSOLE_IP
+update-rc.d tunnel defaults > /dev/null 2>&1
+update-rc.d sagan defaults > /dev/null 2>&1
+update-rc.d -f snorby remove > /dev/null 2>&1
+update-rc.d -f apache2  remove > /dev/null 2>&1
+update-rc.d arpalert defaults > /dev/null 2>&1
+update-rc.d -f mysql remove > /dev/null 2>&1
+/etc/init.d/mysql stop > /dev/null 2>&1
+cp /usr/local/smoothsec/rc.local.sensor /etc/rc.local
+chmod +x /etc/rc.local
+chmod +x /etc/init.d/ssh
+dpkg-reconfigure openssh-server > /dev/null 2>&1
+update-rc.d ssh defaults > /dev/null 2>&1
+
+#samiux tip
+touch /etc/apt/sources.list.d/smoothsec.list
+sed -i '/cdrom/d' /etc/apt/sources.list
+echo "#deb http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list.d/smoothsec.list
+echo "#deb-src http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list.d/smoothsec.list
+echo "#deb http://http.us.debian.org/debian stable main contrib non-free" >> /etc/apt/sources.list.d/smoothsec.list
+echo "deb http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main" >> /etc/apt/sources.list.d/smoothsec.list
+echo "deb-src http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main"  >> /etc/apt/sources.list.d/smoothsec.list
+#end samiux tip
+
+function end_setup(){
+
+       echo""
+       echo -e "\033[1;33m*** CONGRATULATIONS!***\n                                                                                   
+Your SmoothSec Sensor setup has been successfully completed!\033[0m\n"
+       echo""
+       echo "SmoothSec user account.(SSH + SUDO): "$USER_ACCOUNT 
+       echo "SmoothSec local login.(NO SSH):      ""root"
+       echo""
+       echo -e "\033[1;33mPlease reboot Smooth-sec typing:\033[0m  reboot\n"
+}
+
