@@ -184,7 +184,7 @@ def script_update():
 	print "\n"
 	print " [>] Update successfully, now please run the script again!\n"
 	sleep(2)
-	subprocess.Popen("./smoothsec.menu.py",shell=True).wait()
+	subprocess.Popen("smoothsec.menu.py",shell=True).wait()
 	
 def tryharder():
 
