@@ -169,7 +169,7 @@ def script_update():
 
 	print " [>] Updating this script.\n"
 	
-	subprocess.Popen("wget https://github.com/smoothsec/dev/blob/samiux/afpacket/final-3.4/smoothsec.menu.py",shell=True).wait()
+	subprocess.Popen("wget https://raw.github.com/smoothsec/dev/samiux/afpacket/final-3.4/smoothsec.menu.py",shell=True).wait()
 	subprocess.Popen("chmod a+x smoothsec.menu.py",shell=True).wait()
 	print "\n"
 	print " [>] Update successfully, now please run the script again!\n"
