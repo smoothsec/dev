@@ -9,7 +9,7 @@
 # Short-Description: Start/Stop Sagan
 ### END INIT INFO
 
-. /etc/smoothsec.cfg
+#. /etc/smoothsec.cfg
 . /etc/afpacket.cfg
 
 case "$1" in
