@@ -59,6 +59,16 @@ echo -e "\033[1;33mSSH Console<>Sensor tunnel setup.\033[0m\n"
 read -p "Please enter SmoothSec (Snorby) console IP ADDRESS. : " CONSOLE_IP
 echo""
 read -p "Please enter SmoothSec (Snorby) console user. : " CONSOLE_USER
+
+sed -i "s|CONSOLE_IP=192.168.1.180|CONSOLE_IP=$CONSOLE_IP|" /etc/afpacket.cfg
+sed -i "s|CONSOLE_USER=console|CONSOLE_USER=$CONSOLE_USER|" /etc/afpacket.cfg
+
+read -p "You are going to edit the configure file.  Ctl+o to save.  Ctl+x to exit.  Press Enter to continue." TEMP_VAR
+echo""
+
+# run smoothsec.afpacket.standard.setup
+smoothsec.afpacket.standard.setup
+
 echo""
 echo -e "\033[1;33mGenerating public/private rsa key pair.\n
 
