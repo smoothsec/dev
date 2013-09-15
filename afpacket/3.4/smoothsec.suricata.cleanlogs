@@ -1,14 +1,15 @@
 #!/bin/bash
 
-. /etc/smoothsec.cfg
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+fi
+
 . /etc/afpacket.cfg
 
 if [ -d /var/log/suricata ]; then
-
 	/usr/bin/find  /var/log/suricata/processed/ -name "unified2.*"  -mtime +$DAYS -exec rm {} \;
 
 else 
-
 	echo "Suricata directory doesn't exist!!!"
 
 fi
