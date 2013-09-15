@@ -15,6 +15,7 @@ if [ "$AF_SETUP" == "no" ]; then
 		cp /etc/init.d/sagan /usr/local/smoothsec/confs/afpacket/sagan.original
 		cp /etc/init.d/snort /usr/local/smoothsec/confs/afpacket/snort.original
 	fi
+	cp /etc/init.d/tunnel /usr/local/smoothsec/confs/afpacket/tunnel.original
 fi
 
 if [ "$AF_ENGINE" == "suricata" ]; then
@@ -96,6 +97,7 @@ elif [ "$AF_ENGINE" == "snort" ]; then
 	crontab /usr/local/smoothsec/cronempty
 	crontab /usr/local/smoothsec/cronsnort
 fi
+cp /usr/local/smoothsec/confs/afpacket/tunnel.template /etc/init.d/tunnel
 
 sed -i "s|AF_SETUP=no|AF_SETUP=yes|" /etc/afpacket.cfg
 
