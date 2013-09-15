@@ -1,0 +1,30 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+#allow-hotplug eth2
+#iface eth2 inet dhcp
+
+auto af_iface_0
+iface af_iface_0 inet manual
+	up ifconfig af_iface_0 promisc up
+	down ifconfig af_iface_0 down
+	post-up ethtool -K af_iface_0 gro off
+	post-up ethtool -K af_iface_0 lro off
+
+auto af_iface_1
+iface af_iface_1 inet manual
+	up ifconfig af_iface_1 promisc up
+	down ifconfig af_iface_1 down
+	post-up ethtool -K af_iface_1 gro off
+	post-up ethtool -K af_iface_1 lro off
+
+auto af_manage_iface
+iface af_manage_iface inet static
+	address af_sensor_ip
+	netmask 255.255.255.0
+	gateway af_gateway
