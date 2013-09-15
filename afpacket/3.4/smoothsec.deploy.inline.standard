@@ -11,11 +11,11 @@ The setup wizard will guide you to configure SmoothSec for the first time.
 Please follow the setup wizard step by step to complete the basic configuration.\033[0m"
 echo""
 echo -e "\033[1;33mThe Wizard will guide you  through the following steps:
-1.Set root password for local login.(NO SSH LOGIN FOR ROOT.)
-1.Set SmoothSec user account and password.(SSH and SUDO ALLOWED.)
-2.Edit the configure file (Snort or Suricata).
-3.Set Snorby web interface username and password.
-4.Snorby automatic database setup.\033[0m"
+1. Set root password for local login.(NO SSH LOGIN FOR ROOT.)
+1. Set SmoothSec user account and password.(SSH and SUDO ALLOWED.)
+2. Edit the configure file (Snort or Suricata).
+3. Set Snorby web interface username and password.
+4. Snorby automatic database setup.\033[0m"
 
 # Set root password
 echo""
