@@ -30,6 +30,7 @@ if [ "$AF_SETUP" == "yes" ]; then
 		sed -i "s|AF_SETUP=yes|AF_SETUP=no|" /etc/afpacket.cfg
 		#update-rc.d $ENGINE defaults > /dev/null 2>&1
 	fi	
+	cp /usr/local/smoothsec/confs/afpacket/tunnel.original /etc/init.d/tunnel
 	# restore the configure file
 	cp /usr/local/smoothsec/confs/afpacket/afpacket.cfg /etc/	
 fi
