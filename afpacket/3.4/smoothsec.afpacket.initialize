@@ -11,11 +11,9 @@ cp *.update /usr/local/sbin/
 
 cp afpacket.cfg /etc/
 
-#cp tunnel.template /etc/init.d/tunnel
-
 cp smoothsec.menu /usr/local/sbin/
 
 rm /usr/local/sbin/smoothsec.afpacket.initialize
 
-cp /etc/pulledpork/snort/disablesid.conf /usr/local/smoothsec/confs/afpacket/disablesid.conf.original
 echo "1:2000328,1:2002087,1:2003195,1:2003330,1:2003864,1:2011802,1:2013353-1:2013360" >> /etc/pulledpork/snort/disablesid.conf
+smoothsec.snort.rules.update
