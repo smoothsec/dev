@@ -110,6 +110,11 @@ elif [ "$AF_ENGINE" == "snort" ]; then
 	crontab /usr/local/smoothsec/cronsnort
 fi
 
+if [ $DEPLOYMENT == "sensor" ]; then
+	update-rc.d $AF_ENGINE defaults > /dev/null 2>&1
+	update-rc.d sagan defaults > /dev/null 2>&1
+fi
+
 sed -i "s|AF_SETUP=no|AF_SETUP=yes|" /etc/afpacket.cfg
 
 echo "Reboot the system ..."
