@@ -11,7 +11,7 @@ cp *.update /usr/local/sbin/
 
 cp afpacket.cfg /etc/
 
-cp tunnel.template /etc/init.d/tunnel
+#cp tunnel.template /etc/init.d/tunnel
 
 cp smoothsec.menu /usr/local/sbin/
 
