@@ -2,27 +2,24 @@
 
 export PERL_LWP_SSL_VERIFY_HOSTNAME=0
 
-#. /etc/smoothsec.cfg
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+fi
+
 . /etc/afpacket.cfg
 
-if [ $RULES == "et" ]
-then
+if [ $RULES == "et" ]; then
  	#emerging threats rules for snort
 	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/et.pulledpork.conf -o /etc/snort/et/snort.rules
 	/etc/init.d/snort reload
 
-elif
-
- [ $RULES == "vrt" ] 
-then
-
-     #Official VRT rules for snort
+elif [ $RULES == "vrt" ]; then 
+	#Official VRT rules for snort
 	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/vrt.pulledpork.conf -o /etc/snort/vrt/snort.rules
 	/etc/init.d/snort reload
 
 else 
-
-echo "Invalid rule input"
+	echo "Invalid rule input"
 
 fi
 
