@@ -12,11 +12,11 @@ for the first time. Please follow the setup wizard step
 by step to complete the basic configuration.\n
 
 The Wizard will guide you  through the following steps:
-1.Set root password for local login.(NO SSH LOGIN FOR ROOT.)
-2.Set SmoothSec user account and password.(SSH and SUDO ALLOWED.)
-3.Generate the SSH key pair and copy it to the SmoothSec (Snorby) console.
-4.Edit configure file.
-5.Configure the Local Area Network.\033[0m"
+1. Set root password for local login.(NO SSH LOGIN FOR ROOT.)
+2. Set SmoothSec user account and password.(SSH and SUDO ALLOWED.)
+3. Generate the SSH key pair and copy it to the SmoothSec (Snorby) console.
+4. Edit configure file.
+5. Configure the Local Area Network.\033[0m"
 
 # Set root password
 echo""
