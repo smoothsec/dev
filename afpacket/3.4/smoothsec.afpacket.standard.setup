@@ -1,4 +1,10 @@
-nano /etc/afpacket.cfg
+. /etc/afpacket.cfg
+
+if [ $DEPLOYMENT == "console" ]; then
+	echo ""
+else
+	nano /etc/afpacket.cfg
+fi
 
 . /etc/afpacket.cfg
 
