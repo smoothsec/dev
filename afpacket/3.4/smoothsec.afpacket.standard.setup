@@ -120,10 +120,16 @@ elif [ "$AF_ENGINE" == "snort" ]; then
 fi
 
 # Set the engine auto-run
-update-rc.d $AF_ENGINE defaults > /dev/null 2>&1
-update-rc.d sagan defaults > /dev/null 2>&1
-cp /usr/local/smoothsec/confs/afpacket/tunnel.template /etc/init.d/tunnel
+if [ $DEPLOYMENT == "console" ]; then
+	echo ""
+else
+	update-rc.d $AF_ENGINE defaults > /dev/null 2>&1
+	update-rc.d sagan defaults > /dev/null 2>&1
 
+	if [ $DEPLOYMENT == "sensor" ]; then
+		cp /usr/local/smoothsec/confs/afpacket/tunnel.template /etc/init.d/tunnel
+	fi
+fi
 
 # Set the value to yes
 sed -i "s|AF_SETUP=no|AF_SETUP=yes|" /etc/afpacket.cfg
