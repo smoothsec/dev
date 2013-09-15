@@ -20,7 +20,7 @@ Three network interfaces are required to this setup.  If you are running SmoothS
 
 You may need to change the following values when setting up the IPS :
 
-AF_ENGINE - Select snort or suricata (default is snort)
+AF_ENGINE - Select snort or suricata (default is snort).  When selected suricata, a new kernel will be downloaded and installed automatically.
 
 RULES - et or vrt (default is et, if you select vrt you need get the code to operate)
 
