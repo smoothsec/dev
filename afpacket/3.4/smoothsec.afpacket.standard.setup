@@ -61,9 +61,12 @@ if [ "$AF_ENGINE" == "suricata" ]; then
 	cp /usr/local/smoothsec/confs/afpacket/sagan.template /etc/init.d/sagan
 
 	sed -i "s|#interface = eth0|interface = $AF_IFACE_0|" /etc/arpalert/arpalert.conf
-	
-#	update-rc.d suricata defaults > /dev/null 2>&1
-#	update-rc.d sagan defaults > /dev/null 2>&1
+
+	if [ $DEPLOYMENT == "sensor" ]; then	
+		update-rc.d suricata defaults > /dev/null 2>&1
+		update-rc.d sagan defaults > /dev/null 2>&1
+		cp /usr/local/smoothsec/confs/afpacket/tunnel.template /etc/init.d/tunnel
+	fi
 	crontab /usr/local/smoothsec/cronempty
 	crontab /usr/local/smoothsec/cronsuricata
 	
@@ -92,12 +95,14 @@ elif [ "$AF_ENGINE" == "snort" ]; then
 	sed -i "s|demo.snorby.org|$AF_SENSOR_IP|" /var/www/snorby/config/snorby_config.yml
 	sed -i "s|#interface = eth0|interface = $AF_IFACE_0|" /etc/arpalert/arpalert.conf
 
-#	update-rc.d snort defaults > /dev/null 2>&1
-#	update-rc.d sagan defaults > /dev/null 2>&1
+	if [ $DEPLOYMENT == "sensor" ]; then
+		update-rc.d snort defaults > /dev/null 2>&1
+		update-rc.d sagan defaults > /dev/null 2>&1
+		cp /usr/local/smoothsec/confs/afpacket/tunnel.template /etc/init.d/tunnel
+	fi
 	crontab /usr/local/smoothsec/cronempty
 	crontab /usr/local/smoothsec/cronsnort
 fi
-cp /usr/local/smoothsec/confs/afpacket/tunnel.template /etc/init.d/tunnel
 
 sed -i "s|AF_SETUP=no|AF_SETUP=yes|" /etc/afpacket.cfg
 
