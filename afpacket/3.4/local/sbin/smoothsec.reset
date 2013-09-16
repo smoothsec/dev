@@ -170,26 +170,16 @@ function reset_smoothsec() {
 
 read -p "Type here your (Yes/No) : " RESET
 
-if [ $RESET == Yes ]
+if [ $RESET == Yes ]; then
+	echo "yes"
 
-then
-
-echo "yes"
-
-reset_smoothsec
-smoothsec.afpacket.reset
-
-elif [ $RESET == 'No' ]
-
-then
-echo "no"
-
-exit 0
-
+	reset_smoothsec
+	smoothsec.afpacket.reset
+elif [ $RESET == 'No' ]; then
+	echo "no"
+	exit 0
 else
-
-echo "Invalid Input"
-
+	echo "Invalid Input"
 fi                
 
 
