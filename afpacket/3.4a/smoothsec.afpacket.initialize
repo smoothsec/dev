@@ -9,7 +9,7 @@ cp smoothsec.switch.engine /usr/local/sbin/
 cp afpacket.cfg /usr/local/smoothsec/confs/afpacket/
 cp *.update /usr/local/sbin/
 
-cp afpacket.cfg /etc/
+#cp afpacket.cfg /etc/
 
 #cp smoothsec.menu /usr/local/sbin/
 

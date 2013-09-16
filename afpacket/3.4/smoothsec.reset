@@ -17,7 +17,10 @@ SmoothSec as mmanagement console to view and classify
 if [ -f /etc/smoothsec.cfg ]; then
 	. /etc/smoothsec.cfg
 fi
-. /etc/afpacket.cfg
+
+if [ -f /etc/afpacket.cfg ]; then
+	. /etc/afpacket.cfg
+fi
 
 cp /usr/local/smoothsec/rc.local.reset /etc/rc.local 
 chmod +x /etc/rc.local

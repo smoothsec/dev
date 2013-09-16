@@ -2,7 +2,9 @@
 
 if [ -f /etc/smoothsec.cfg ]; then
 	. /etc/smoothsec.cfg
-else
+fi
+
+if [ -f /etc/afpacket.cfg ]; then
 	. /etc/afpacket.cfg
 fi
 

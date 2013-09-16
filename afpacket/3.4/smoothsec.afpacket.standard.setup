@@ -4,7 +4,9 @@
 # samiux@smoothsec.org
 
 # Load this file
-. /etc/afpacket.cfg
+if [ -f /etc/afpacket.cfg ]; then
+	. /etc/afpacket.cfg
+fi
 
 # If DEPLOYMENT=console, do nothing.  Otherwise, edit the config file
 if [ $DEPLOYMENT == "console" ]; then
@@ -14,7 +16,9 @@ else
 fi
 
 # Reload this file
-. /etc/afpacket.cfg
+if [ -f /etc/afpacket.cfg ]; then
+	. /etc/afpacket.cfg
+fi
 
 # Do only when AF_SETUP=no
 if [ "$AF_SETUP" == "no" ]; then

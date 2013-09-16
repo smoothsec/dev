@@ -3,6 +3,8 @@
 # phillip.bailey@smoothsec.org
 # samiux@smoothsec.org
 
+cp /usr/local/smoothsec/confs/afpacket/afpacket.cfg /etc/
+
 # Display message
 clear
 echo""
