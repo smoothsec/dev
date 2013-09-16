@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+fi
+
+if [ -f /etc/afpacket.cfg ]; then
+	. /etc/afpacket.cfg
+fi
+
+if [ -d /var/log/snort ]; then
+	/usr/bin/find  /var/log/snort/processed/ -name "snort.unified2*"  -mtime +$DAYS -exec rm {} \;
+
+else 
+	echo "Snort directory doesn't exist!!!"
+
+fi

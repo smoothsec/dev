@@ -1,0 +1,83 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          sagan
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/Stop Sagan
+### END INIT INFO
+
+#. /etc/smoothsec.cfg
+if [ -f /etc/afpacket.cfg ]; then
+	. /etc/afpacket.cfg
+fi
+
+case "$1" in
+start)
+
+echo "Starting Sagan...."
+
+rm -rf  /var/run/sagan/
+mkdir /var/run/sagan/
+chown -R sagan  /var/run/sagan/
+touch /var/run/sagan/sagan.fifo 
+chown -R sagan  /var/run/sagan/sagan.fifo
+sleep 2
+/usr/local/bin/sagan -D  -f /etc/sagan/sagan.conf
+/usr/local/bin/pigsty -c /etc/pigsty/sagan.config.js   -n "Sagan $AF_SENSOR_IP" -d /var/log/sagan/ -m sagan.u2.*  -D
+/etc/init.d/rsyslog restart
+
+;;
+
+stop)
+
+echo "Stoppping Sagan"
+SAGAN_PID=`pidof sagan`
+kill -9 $SAGAN_PID
+SAGAN_PIGSTY_PID=`cat /var/run/pigsty.sagan.pid`
+kill -9 $SAGAN_PIGSTY_PID
+
+;;
+
+restart)
+echo "Stoppping Sagan"
+SAGAN_PID=`pidof sagan`
+kill -9 $SAGAN_PID
+SAGAN_PIGSTY_PID=`cat /var/run/pigsty.sagan.pid`
+kill -9 $SAGAN_PIGSTY_PID
+
+echo "Starting Sagan"
+
+rm -rf  /var/run/sagan/
+mkdir /var/run/sagan/
+chown -R sagan  /var/run/sagan/
+touch /var/run/sagan/sagan.fifo 
+chown -R sagan  /var/run/sagan/sagan.fifo
+sleep 2
+/usr/local/bin/sagan -D  -f /etc/sagan/sagan.conf
+/usr/local/bin/pigsty -c /etc/pigsty/sagan.config.js   -n "Sagan $AF_SENSOR_IP" -d /var/log/sagan/ -m sagan.u2.*  -D
+/etc/init.d/rsyslog restart
+;;
+
+enable)
+
+echo "Enable Sagan and Pigsty to start at boot time"
+update-rc.d suricata enable
+/etc/init.d/sagan start
+;;
+
+disable)
+echo "Disable Sagan and Pigsty to start at boot time"
+update-rc.d suricata disable
+/etc/init.d/sagan stop
+;;
+
+*)
+ echo "Usage: /etc/init.d/suricata {start|stop|restart|enable|disable}"
+ exit 1
+  ;;
+esac
+
+exit 0
