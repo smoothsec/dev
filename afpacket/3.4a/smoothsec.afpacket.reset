@@ -14,6 +14,12 @@ if [ -f /etc/afpacket.cfg ]; then
 	. /etc/afpacket.cfg
 fi
 
+if [ -z "$AF_SETUP" ]; then
+	echo ""
+#	echo "IPS mode not yet setup."
+	exit
+fi
+
 # Do when AF_SETUP=yes
 if [ "$AF_SETUP" == "yes" ]; then
 	if [ "$AF_ENGINE" == "suricata" ]; then
