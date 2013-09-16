@@ -9,14 +9,14 @@ if [ -f /etc/afpacket.cfg ]; then
 fi
 
 # check if running IPS Mode or not
-if [ $AF_SETUP == "yes" ]; then
+if [ -z "$AF_SETUP" ]; then
+	echo ""
+	echo "IDS/IPS not yet setup."
+	exit
+else [ $AF_SETUP == "yes" ]; then
 	echo""
 	echo "You are currently running $AF_ENGINE IPS mode."
 	echo "You can not switch.  Unless you reset it."
-	exit
-elif [ -z "$ENGINE" ]; then
-	echo ""
-	echo "IDS/IPS not yet setup."
 	exit
 fi
 
