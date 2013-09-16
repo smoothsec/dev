@@ -48,7 +48,9 @@ if [ "$AF_SETUP" == "yes" ]; then
 	fi	
 
 	# Resore the original files
-	cp /usr/local/smoothsec/confs/afpacket/tunnel.original /etc/init.d/tunnel
+	if [ $DEPLOYMENT == "sensor" ]; then
+		cp /usr/local/smoothsec/confs/afpacket/tunnel.original /etc/init.d/tunnel
+	fi
 	cp /usr/local/smoothsec/confs/afpacket/afpacket.cfg /etc/	
 fi
 
