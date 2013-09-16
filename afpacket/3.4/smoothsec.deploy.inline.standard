@@ -3,6 +3,13 @@
 # phillip.bailey@smoothsec.org
 # samiux@smoothsec.org
 
+PROCESS_NUM=`ps aux | grep sagan`
+if [ ! -z "$PROCESS_NUM" ]; then
+	echo ""
+	echo "IDS/IPS has been setup.  You cannot do over on it.  Exit."
+	exit
+fi
+
 cp /usr/local/smoothsec/confs/afpacket/afpacket.cfg /etc/
 
 # Display message
