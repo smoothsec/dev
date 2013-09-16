@@ -1,0 +1,8 @@
+# Drop all traffic to the port 80
+# Place it at /etc/suricata/rules/local.rules
+# Make sure you have added "- local.rules" under "rule-files:" of suricata.yaml
+# Run smoothsec.suricata.rules.update to make the test rule active
+# Comment the rule with "#" to disable it
+drop tcp any any -> any 80 (msg: "Testing drop"; content:"*"; http_header; sid:100000000;)
+
+
