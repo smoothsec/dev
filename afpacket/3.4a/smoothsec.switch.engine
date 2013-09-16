@@ -13,7 +13,7 @@ if [ -z "$AF_SETUP" ]; then
 	echo ""
 	echo "IDS/IPS not yet setup."
 	exit
-else [ $AF_SETUP == "yes" ]; then
+else [ $AF_SETUP == "yes" ]
 	echo""
 	echo "You are currently running $AF_ENGINE IPS mode."
 	echo "You can not switch.  Unless you reset it."
