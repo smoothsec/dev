@@ -22,6 +22,11 @@ if [ -f /etc/afpacket.cfg ]; then
 	. /etc/afpacket.cfg
 fi
 
+if [ -z "$ENGINE" ]; then
+	echo ""
+	exit
+fi
+
 cp /usr/local/smoothsec/rc.local.reset /etc/rc.local 
 chmod +x /etc/rc.local
 #rm /etc/smoothsec.cfg > /dev/null 2>&1
