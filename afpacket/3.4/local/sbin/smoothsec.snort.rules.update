@@ -10,6 +10,12 @@ if [ -f /etc/afpacket.cfg ]; then
 	. /etc/afpacket.cfg
 fi
 
+if [ -z "$RULES" ]; then
+	echo ""
+	echo "RULES variable not found!"
+	exit
+fi
+
 if [ $RULES == "et" ]; then
  	#emerging threats rules for snort
 	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/et.pulledpork.conf -o /etc/snort/et/snort.rules
