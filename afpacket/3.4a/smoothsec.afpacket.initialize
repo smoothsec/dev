@@ -1,4 +1,4 @@
-mkdir /usr/local/smoothsec/confs/afpacket
+#mkdir /usr/local/smoothsec/confs/afpacket
 cp *.template /usr/local/smoothsec/confs/afpacket/
 cp smoothsec.afpacket.* /usr/local/sbin/
 cp smoothsec.deploy.inline.* /usr/local/sbin/
@@ -11,9 +11,9 @@ cp *.update /usr/local/sbin/
 
 cp afpacket.cfg /etc/
 
-cp smoothsec.menu /usr/local/sbin/
+#cp smoothsec.menu /usr/local/sbin/
 
 rm /usr/local/sbin/smoothsec.afpacket.initialize
 
-echo "1:2000328,1:2002087,1:2003195,1:2003330,1:2003864,1:2011802,1:2013353-1:2013360" >> /etc/pulledpork/snort/disablesid.conf
-smoothsec.snort.rules.update
+#echo "1:2000328,1:2002087,1:2003195,1:2003330,1:2003864,1:2011802,1:2013353-1:2013360" >> /etc/pulledpork/snort/disablesid.conf
+#smoothsec.snort.rules.update
