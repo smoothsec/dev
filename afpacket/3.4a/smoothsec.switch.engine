@@ -20,6 +20,12 @@ else [ $AF_SETUP == "yes" ]; then
 	exit
 fi
 
+if [ -z "$ENGINE" ]; then
+	echo ""
+	echo "IDS/IPS not yet setup."
+	exit
+fi
+
 if  [ $ENGINE == "snort" ]; then
 	echo""
 	echo "You are currently running snort IDS"
