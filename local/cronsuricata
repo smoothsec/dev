@@ -1,0 +1,3 @@
+45 23 * * * /usr/local/sbin/smoothsec.suricata.rules.update  >/var/log/smoothsec/suricata.update.log 2>&1
+30 23 * * * /usr/local/sbin/smoothsec.suricata.cleanlogs >/var/log/smoothsec/suricata.cleanlogs.log 2>&1
+20 23 * * * /usr/local/sbin/smoothsec.sagan.cleanlogs >/var/log/smoothsec/sagan.cleanlogs.log 2>&1
