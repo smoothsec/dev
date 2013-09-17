@@ -1,0 +1,52 @@
+#!/bin/bash
+# phillip.bailey@smoothsec.org
+# samiux@smoothsec.org
+
+clear
+echo -e "\033[1;33m*** Welcome to SmoothSec 3.4 ***\033[0m\n"
+echo""
+echo "Available deployments:"
+echo""
+echo "One Network Interface is required."
+echo -e "\033[1;33mstandard    \033[0m" "(IDS mode - All in one mode [Snorby + Sensor])"
+echo""
+echo -e "\033[1;33mconsole     \033[0m" "(IDS mode - Distributed [Only Snorby web console])"
+echo""
+echo -e "\033[1;33msensor      \033[0m" "(IDS mode - Distributed [Only sensor])"
+echo""
+echo""
+echo "Three Network Interface are required."
+echo -e "\033[1;33mips-standard\033[0m" "(IPS mode - All in one mode [Snorby + Sensor])"
+echo""
+echo -e "\033[1;33mips-console \033[0m" "(IPS mode - Distributed [Only Snorby web console])"
+echo""
+echo -e "\033[1;33mips-sensor  \033[0m" "(IPS mode - Distributed [Only sensor])"
+echo""
+echo""
+echo -e "\033[1;33mexit        \033[0m" "(If unsure.)"
+echo""
+
+read -p "Type here your favourite deployment : " MODE
+
+if [ $MODE == standard ]; then
+    /usr/local/sbin/smoothsec.deploy.standard
+
+elif [ $MODE == 'console' ]; then
+    /usr/local/sbin/smoothsec.deploy.console 
+
+elif [ $MODE == 'sensor' ]; then
+    /usr/local/sbin/smoothsec.deploy.sensor
+
+elif [ $MODE == 'ips-standard' ]; then
+    /usr/local/sbin/smoothsec.deploy.inline.standard
+
+elif [ $MODE == 'ips-console' ]; then
+   /usr/local/sbin/smoothsec.deploy.inline.console
+
+elif [ $MODE == 'ips-sensor' ]; then
+   /usr/local/sbin/smoothsec.deploy.inline.sensor
+
+else
+	exit
+
+fi
