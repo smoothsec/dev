@@ -1,0 +1,6 @@
+#!/bin/bash
+export PERL_LWP_SSL_VERIFY_HOSTNAME=0
+
+
+/usr/local/bin/pulledpork.pl   -c  /etc/pulledpork/suricata/pulledpork.conf -S suricata  -o /etc/suricata/rules/emerging.rules
+/etc/init.d/suricata reload
