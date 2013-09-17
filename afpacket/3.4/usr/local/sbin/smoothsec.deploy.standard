@@ -16,12 +16,12 @@ Please follow the setup wizard step by step to complete the basic configuration.
 echo""
 echo -e "\033[1;33mThe Wizard will guide you  through the following steps:
 1. Set root password for local login.(NO SSH LOGIN FOR ROOT.)
-1. Set SmoothSec user account and  password.(SSH and SUDO ALLOWED.)
-2. Choose the IDS engine (Snort or Suricata).
-3. Set the network interface to listen to.
-4. Configure the Local Area Network.
-5. Set Snorby web interface username and password.
-6. Snorby automatic database setup.\033[0m"
+2. Set SmoothSec user account and  password.(SSH and SUDO ALLOWED.)
+3. Choose the IDS engine (Snort or Suricata).
+4. Set the network interface to listen to.
+5. Configure the Local Area Network.
+6. Set Snorby web interface username and password.
+7. Snorby automatic database setup.\033[0m"
 
 echo""
 echo -e "\033[1;31mChanging root password -  Please choose a strong one!\033[0m\n"

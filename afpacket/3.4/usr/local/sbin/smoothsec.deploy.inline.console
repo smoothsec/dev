@@ -16,7 +16,7 @@ cp /usr/local/smoothsec/confs/afpacket/afpacket.cfg /etc/
 # Message to display
 clear
 echo""
-echo -e "\033[1;33m*** Welcome to SmoothSec Inline Mode Setup Wizard [Snorby Console]***\n
+echo -e "\033[1;33m*** Welcome to SmoothSec (Inline Mode) Setup Wizard [Snorby Console]***\n
 The setup wizard will guide you to configure and deploy
 SmoothSec as mmanagement console to view and classify 
 multiple and remote sensor alerts. Please follow the setup
