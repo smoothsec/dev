@@ -17,11 +17,11 @@ multiple and remote sensor alerts. Please follow the setup
 wizard step by step to complete the basic configuration.\n
 
 The Wizard will guide you  through the following steps:
-1.Set root password for local login.(NO SSH LOGIN FOR ROOT.)
-2.Set SmoothSec user account and  password.(SSH and SUDO ALLOWED.)
-3.Set management interface.
-4.Set Snorby web interface username and password.
-5.Snorby automatic database setup.\033[0m"
+1. Set root password for local login.(NO SSH LOGIN FOR ROOT.)
+2. Set SmoothSec user account and  password.(SSH and SUDO ALLOWED.)
+3. Set management interface.
+4. Set Snorby web interface username and password.
+5. Snorby automatic database setup.\033[0m"
 
 echo""
 echo -e "\033[1;31mChanging root password -  Please choose a strong one!\033[0m\n"

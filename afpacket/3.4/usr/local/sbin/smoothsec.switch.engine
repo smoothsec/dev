@@ -2,7 +2,7 @@
 
 if [ -f /etc/smoothsec.cfg ]; then
 	. /etc/smoothsec.cfg
-elseif [ -f /etc/afpacket.cfg ]; then
+elif [ -f /etc/afpacket.cfg ]; then
 	. /etc/afpacket.cfg
 
 	if [ $AF_SETUP == "yes" ]; then
@@ -25,8 +25,8 @@ fi
 if  [ $ENGINE == "snort" ]; then
 	echo""
 	echo "You are currently running snort IDS"
-	PS3='Please enter your choice (type 1 for Suricata or 2 for both [Suricata+Snort]):'
-	options=("suricata" "both")
+	PS4='Please enter your choice (type 1 for Suricata or 2 for both [Suricata+Snort], 3 to Quit):'
+	options=("suricata" "both" "quit")
 
 	select opt in "${options[@]}"
 	do
@@ -54,6 +54,10 @@ if  [ $ENGINE == "snort" ]; then
             		break
 
            		;;
+		"quit")
+			echo "quit"
+			exit
+			;;
         	*) echo invalid option;;
     		esac
 	done
