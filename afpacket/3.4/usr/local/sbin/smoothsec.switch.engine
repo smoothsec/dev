@@ -21,11 +21,12 @@ else
         exit
 fi
 
-if [ $ENGINE == "console" ]; then
+if [ $DEPLOYMENT == "console" ]; then
 	echo ""
 	echo "Currently is Console, cannot switch."
 	exit
 fi
+
 # Main routine
 if  [ $ENGINE == "snort" ]; then
 	echo""
