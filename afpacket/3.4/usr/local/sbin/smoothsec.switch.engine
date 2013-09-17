@@ -72,7 +72,7 @@ if  [ $ENGINE == "snort" ]; then
 elif [ $ENGINE == "suricata" ]; then 
 	echo""
 	echo "You are currently running Suricata IDS"
-	PS4='Please enter your choice (type 1 for Snort or 2 for Snort+Suricata, 3 to Quit):'                                                                  
+	PS4='Please enter your choice (type 1 for Snort or 2 for Snort+Suricata, 3 to Quit):'
 	options=("snort" "both" "quit")
 
 	select opt in "${options[@]}"
@@ -110,7 +110,7 @@ elif [ $ENGINE == "suricata" ]; then
 elif [ $ENGINE == "both" ]; then
 	echo""
 	echo "You are currently running Suricata+Snort IDS [double mode]"
-	PS4='Please enter your choice (type 1 for Snort or 2 for Suricata, 3 to Quit):'                                                                  
+	PS4='Please enter your choice (type 1 for Snort or 2 for Suricata, 3 to Quit):'                                                  
 	options=("snort" "suricata" "quit")
 
 	select opt in "${options[@]}"
