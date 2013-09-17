@@ -2,30 +2,26 @@
 
 if [ -f /etc/smoothsec.cfg ]; then
 	. /etc/smoothsec.cfg
-fi
-
-if [ -f /etc/afpacket.cfg ]; then
+elseif [ -f /etc/afpacket.cfg ]; then
 	. /etc/afpacket.cfg
+
+	if [ $AF_SETUP == "yes" ]; then
+        	echo""
+        	echo "You are currently running $AF_ENGINE IPS mode."
+        	echo "You can not switch.  Unless you reset it."
+        	exit
+	else
+	        echo ""
+	        echo "IDS/IPS not yet setup."
+        	exit
+	fi
+else
+        echo ""
+        echo "IDS/IPS not yet setup."
+        exit
 fi
 
-# check if running IPS Mode or not
-if [ -z "$AF_SETUP" ]; then
-	echo ""
-	echo "IDS/IPS not yet setup."
-	exit
-else [ $AF_SETUP == "yes" ]
-	echo""
-	echo "You are currently running $AF_ENGINE IPS mode."
-	echo "You can not switch.  Unless you reset it."
-	exit
-fi
-
-if [ -z "$ENGINE" ]; then
-	echo ""
-	echo "IDS/IPS not yet setup."
-	exit
-fi
-
+# Main routine
 if  [ $ENGINE == "snort" ]; then
 	echo""
 	echo "You are currently running snort IDS"

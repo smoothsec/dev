@@ -13,6 +13,7 @@ fi
 if [ -z "$ENGINE" ]; then
         if [ -z "$AF_ENGINE" ]; then
                 echo ""
+		echo "Nothing to do."
                 exit
         fi
 fi
