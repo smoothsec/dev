@@ -18,12 +18,12 @@ fi
 
 if [ $RULES == "et" ]; then
  	#emerging threats rules for snort
-	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/et.pulledpork.conf -o /etc/snort/et/snort.rules
+	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/et.pulledpork.conf -o /etc/snort/et/snort.rules -P
 	/etc/init.d/snort reload
 
 elif [ $RULES == "vrt" ]; then 
 	#Official VRT rules for snort
-	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/vrt.pulledpork.conf -o /etc/snort/vrt/snort.rules
+	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/vrt.pulledpork.conf -o /etc/snort/vrt/snort.rules -P
 	/etc/init.d/snort reload
 
 else 
