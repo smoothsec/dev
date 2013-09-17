@@ -12,6 +12,12 @@ Easy to configure and deploy.  Working on phyiscal hardware and virtual machines
 
 Supports Snort and Suricata in Inline mode (IPS - Intrusion Prevention System)
 
+<h3>Download</h3>
+
+Beta6 is just release today!
+
+[You can download at here](http://bailey.st/files/beta6.smoothsec-3.4-amd64.iso)
+
 <h3>Configuration</h3>
 
 During the installation, you are required to configure a config file by editor.
