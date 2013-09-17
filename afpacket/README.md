@@ -56,7 +56,7 @@ download them and install them yourself.
 
 <code>cd dev-samiux/afpacket/3.4/</code>
 
-<code>sudo cp -R local/ /usr/local/</code>
+<code>sudo cp -Ra * /</code>
 
 
 
