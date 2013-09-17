@@ -21,6 +21,11 @@ else
         exit
 fi
 
+if [ $ENGINE == "console" ]; then
+	echo ""
+	echo "Currently is Console, cannot switch."
+	exit
+fi
 # Main routine
 if  [ $ENGINE == "snort" ]; then
 	echo""
@@ -66,13 +71,14 @@ if  [ $ENGINE == "snort" ]; then
 elif [ $ENGINE == "suricata" ]; then 
 	echo""
 	echo "You are currently running Suricata IDS"
-	PS3='Please enter your choice (type 1 for Snort or 2 for Snort+Suricata):'                                                                  
-	options=("snort" "both")
+	PS4='Please enter your choice (type 1 for Snort or 2 for Snort+Suricata, 3 to Quit):'                                                                  
+	options=("snort" "both" "quit")
 
 	select opt in "${options[@]}"
 	do
     		case $opt in
         	"snort")
+			echo "Snort enabled"
         		sed -i 's/suricata/snort/g' /etc/smoothsec.cfg
         		crontab /usr/local/smoothsec/cronempty
         		crontab /usr/local/smoothsec/cronsnort 
@@ -85,26 +91,32 @@ elif [ $ENGINE == "suricata" ]; then
         		break
             		;;
         	"both")
+			echo "Both enabled"
         		sed -i 's/suricata/both/g' /etc/smoothsec.cfg
         		crontab /usr/local/smoothsec/cronempty
         		crontab /usr/local/smoothsec/cronboth
         		update-rc.d snort defaults
         		/etc/init.d/snort start
         		break
-		           ;;
+		        ;;
+		"quit")
+			echo "quit"
+			exit
+			;;
         	*) echo invalid option;;
     		esac
 	done
 elif [ $ENGINE == "both" ]; then
 	echo""
 	echo "You are currently running Suricata+Snort IDS [double mode]"
-	PS3='Please enter your choice (type 1 for Snort or 2 for Suricata):'                                                                  
-	options=("snort" "suricata")
+	PS4='Please enter your choice (type 1 for Snort or 2 for Suricata, 3 to Quit):'                                                                  
+	options=("snort" "suricata" "quit")
 
 	select opt in "${options[@]}"
 	do
     		case $opt in
         	"snort")
+			echo "Snort enabled"
        			sed -i 's/both/snort/g' /etc/smoothsec.cfg
        			crontab /usr/local/smoothsec/cronempty
        			crontab /usr/local/smoothsec/cronsnort 
@@ -114,6 +126,7 @@ elif [ $ENGINE == "both" ]; then
 		        break
             		;;
         	"suricata")
+			echo "Suricata enabled"
         		sed -i 's/both/suricata/g' /etc/smoothsec.cfg
         		crontab /usr/local/smoothsec/cronempty
         		crontab /usr/local/smoothsec/cronsuricata 
@@ -122,6 +135,10 @@ elif [ $ENGINE == "both" ]; then
         		/etc/init.d/suricata restart
 		        break
            		;;
+		"quit")
+			echo "quit"
+			exit
+			;;
         	*) echo invalid option;;
     		esac
 	done
