@@ -1,3 +1,21 @@
+
+
+Updates
+
+PulledPork v0.7.0 
+Pigsty 0.1.8 
+
+New features
+
+Distributed Console-Sensor architecture.
+IPS (Intrusion Prevention) setup.
+Hard reset (Default state reset).
+Rules reload (Snort and Suricata).
+
+
+
+ToolKit
+
 nfos
 dsniff
 editcap
