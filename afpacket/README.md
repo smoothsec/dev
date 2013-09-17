@@ -46,12 +46,14 @@ AF_SENSOR_IP - The sensor IP address, which is also the IP address of AF_MANAGE_
 
 AF_GATEWAY - The gateway of the AF_SENSOR_IP (or AF_MANAGE_IFACE) network
 
-AF_HOME_NETWORK - The subnet of AF_SENSOR_IP
+AF_HOME_NETWORK - The subnet of AF_SENSOR_IP (or AF_MANAGE_IFACE)
 
 The editor to edit the config file is namely nano.  You can save the content with 
 CTRL+o and exit with CTRL+x.
 
 <h3>Remarks</h3>
+
+After the installation, you are required to deal with the rules sets.  There is no drop rule enabled.
 
 Normally, all the required files are in position.  If there are some fixes, you can
 download them and install them yourself.
