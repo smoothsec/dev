@@ -59,6 +59,8 @@ if [ "$AF_SETUP" == "yes" ]; then
 	if [ $DEPLOYMENT == "sensor" ]; then
 		cp /usr/local/smoothsec/confs/afpacket/tunnel.original /etc/init.d/tunnel
 	fi
+
+	update-rc.d sagan remove > /dev/null 2>&1
 	rm /etc/afpacket.cfg	
 	rm /usr/local/smoothsec/confs/afpacket/*.original
 fi

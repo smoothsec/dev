@@ -3,7 +3,7 @@
 # phillip.bailey@smoothsec.org
 # samiux@smoothsec.org
 
-PROCESS_NUM=`ps aux | grep sagan`
+PROCESS_NUM=`pgrep -f sagan`
 if [ ! -z "$PROCESS_NUM" ]; then
 	echo ""
 	echo "IDS/IPS has been setup.  You cannot do over on it.  Exit."
