@@ -165,6 +165,7 @@ function reset_smoothsec() {
 
 	fi
 
+	cd /
 	cp /usr/local/smoothsec/rc.local.reset /etc/rc.local
 	chmod +x /etc/rc.local
 
