@@ -62,7 +62,8 @@ if [ "$AF_ENGINE" == "suricata" ]; then
 #        	fi
 	        # change to snort setup
 		sed -i "s|AF_ENGINE=suricata|AF_ENGINE=snort|" /etc/afpacket.cfg
-
+		# Reload the configure file
+		. /etc/afpacket.cfg
         	cp /usr/local/smoothsec/confs/afpacket/sagan.conf.template /etc/sagan/sagan-afpacket.conf
         	sed -i "s|anynet|$AF_SENSOR_IP|" /etc/sagan/sagan-afpacket.conf
         	mv /etc/sagan/sagan-afpacket.conf /etc/sagan/sagan.conf
