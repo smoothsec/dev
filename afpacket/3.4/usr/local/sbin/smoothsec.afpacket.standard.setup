@@ -187,5 +187,6 @@ fi
 # Set the value to yes
 sed -i "s|AF_SETUP=no|AF_SETUP=yes|" /etc/afpacket.cfg
 
-echo "Reboot the system ..."
-
+if [ $DEPLOYMENT == "sensor" ]; then
+	echo "Reboot the system ..."
+fi
