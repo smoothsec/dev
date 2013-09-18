@@ -47,6 +47,7 @@ if [ "$AF_ENGINE" == "suricata" ]; then
 		# no 3.10.x kernel for 32-bit, thus set to snort then
 		echo ""
 		echo "No 3.10.x Kernel for 32-bit, fallback to Snort!"
+		echo ""
 #		if [ ! -f /usr/local/smoothsec/confs/afpacket/initrd.img-3.10-2-686-pae ]; then
 #                	touch /etc/apt/sources.list.d/newkernel.list
 #                	echo "deb http://ftp.us.debian.org/debian unstable main" > /etc/apt/sources.list.d/newkernel.list
@@ -60,6 +61,13 @@ if [ "$AF_ENGINE" == "suricata" ]; then
 #                	cp /usr/local/smoothsec/confs/afpacket/*-3.10-2-* /boot/
 #                	update-grub
 #        	fi
+		# backup the original file
+                # Backup the files
+                cp /etc/network/interfaces /usr/local/smoothsec/confs/afpacket/interfaces.original
+                cp /etc/sagan/sagan.conf /usr/local/smoothsec/confs/afpacket/sagan.conf.original
+                cp /etc/init.d/sagan /usr/local/smoothsec/confs/afpacket/sagan.original
+                cp /etc/init.d/snort /usr/local/smoothsec/confs/afpacket/snort.original
+
 	        # change to snort setup
 		sed -i "s|AF_ENGINE=suricata|AF_ENGINE=snort|" /etc/afpacket.cfg
 		# Reload the configure file
