@@ -44,19 +44,52 @@ fi
 if [ "$AF_ENGINE" == "suricata" ]; then
 	# If kernel image files are not exist, download and install them 
 	if [ `uname -m` == "i686" ]; then
-		if [ ! -f /usr/local/smoothsec/confs/afpacket/initrd.img-3.10-2-686-pae ]; then
-                	touch /etc/apt/sources.list.d/newkernel.list
-                	echo "deb http://ftp.us.debian.org/debian unstable main" > /etc/apt/sources.list.d/newkernel.list
-                	echo "deb-src http://ftp.us.debian.org/debian unstable main" >> /etc/apt/sources.list.d/newkernel.list
+		# no 3.10.x kernel for 32-bit, thus set to snort then
+		echo ""
+		echo "No 3.10.x Kernel for 32-bit, fallback to Snort!"
+#		if [ ! -f /usr/local/smoothsec/confs/afpacket/initrd.img-3.10-2-686-pae ]; then
+#                	touch /etc/apt/sources.list.d/newkernel.list
+#                	echo "deb http://ftp.us.debian.org/debian unstable main" > /etc/apt/sources.list.d/newkernel.list
+#                	echo "deb-src http://ftp.us.debian.org/debian unstable main" >> /etc/apt/sources.list.d/newkernel.list
+#
+#                	apt-get update
+#                	apt-get -y install linux-image-3.10-2-686-pae linux-headers-3.10-2-686-pae
+#                	rm /etc/apt/sources.list.d/newkernel.list
+#        	else
+#                	# If kernel image files are exist, copy to their original place and update GRUB
+#                	cp /usr/local/smoothsec/confs/afpacket/*-3.10-2-* /boot/
+#                	update-grub
+#        	fi
+	        # change to snort setup
+		sed -i "s|AF_ENGINE=suricata|AF_ENGINE=snort|" /etc/afpacket.cfg
 
-                	apt-get update
-                	apt-get -y install linux-image-3.10-2-686-pae linux-headers-3.10-2-686-pae
-                	rm /etc/apt/sources.list.d/newkernel.list
+        	cp /usr/local/smoothsec/confs/afpacket/sagan.conf.template /etc/sagan/sagan-afpacket.conf
+        	sed -i "s|anynet|$AF_SENSOR_IP|" /etc/sagan/sagan-afpacket.conf
+        	mv /etc/sagan/sagan-afpacket.conf /etc/sagan/sagan.conf
+
+        	cp /usr/local/smoothsec/confs/afpacket/sagan.template /etc/init.d/sagan
+
+        	# If DEPLOYMENT=console, do nothing
+        	if [ $DEPLOYMENT == "console" ]; then
+                	echo ""
         	else
-                	# If kernel image files are exist, copy to their original place and update GRUB
-                	cp /usr/local/smoothsec/confs/afpacket/*-3.10-2-* /boot/
-                	update-grub
+                	cp /usr/local/smoothsec/confs/afpacket/interfaces.afpacket.snort.template /etc/network/interfaces.afpacket
+                	sed -i "s|af_iface_0|$AF_IFACE_0|" /etc/network/interfaces.afpacket
+                	sed -i "s|af_iface_1|$AF_IFACE_1|" /etc/network/interfaces.afpacket
+                	#sed -i "s|0.0.0.0|promisc|" /etc/network/interfaces.afpacket
+                	sed -i "s|af_manage_iface|$AF_MANAGE_IFACE|" /etc/network/interfaces.afpacket
+                	sed -i "s|af_sensor_ip|$AF_SENSOR_IP|" /etc/network/interfaces.afpacket
+                	sed -i "s|af_gateway|$AF_GATEWAY|" /etc/network/interfaces.afpacket
+                	mv /etc/network/interfaces.afpacket /etc/network/interfaces
         	fi
+
+        	cp /usr/local/smoothsec/confs/afpacket/snort-afpacket.template /etc/init.d/snort
+
+        	sed -i "s|demo.snorby.org|$AF_SENSOR_IP|" /var/www/snorby/config/snorby_config.yml
+        	sed -i "s|#interface = eth0|interface = $AF_IFACE_0|" /etc/arpalert/arpalert.conf
+
+        	crontab /usr/local/smoothsec/cronempty
+        	crontab /usr/local/smoothsec/cronsnort
 	else
 		if [ ! -f /usr/local/smoothsec/confs/afpacket/initrd.img-3.10-2-amd64 ]; then
 			touch /etc/apt/sources.list.d/newkernel.list
