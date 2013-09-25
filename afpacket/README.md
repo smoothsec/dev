@@ -14,9 +14,11 @@ Supports Snort and Suricata in Inline mode (IPS - Intrusion Prevention System)
 
 <h3>Download</h3>
 
-Beta6 is just release today!
+The current version is 3.4.
 
-[You can download at here](http://bailey.st/files/beta6.smoothsec-3.4-amd64.iso)
+[You can download at here](http://http://sourceforge.net/projects/smoothsec/files/SmoothSec-3.4/)
+
+Please select 64-bit to download as there is no Suricata IPS for 32-bit.
 
 <h3>Configuration</h3>
 
