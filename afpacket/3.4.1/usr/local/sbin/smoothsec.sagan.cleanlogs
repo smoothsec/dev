@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+fi
+
+if [ -f /etc/afpacket.cfg ]; then
+	. /etc/afpacket.cfg
+fi
+
+if [ -d /var/log/sagan ]; then
+	/usr/bin/find  /var/log/sagan/processed/ -name "sagan.u2*"  -mtime +$DAYS -exec rm {} \;
+
+else 
+	echo "Sagan directory doesn't exist!!!"
+
+fi

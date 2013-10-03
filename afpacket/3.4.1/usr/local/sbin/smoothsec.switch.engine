@@ -1,0 +1,152 @@
+#!/bin/bash
+
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+elif [ -f /etc/afpacket.cfg ]; then
+	. /etc/afpacket.cfg
+
+	if [ $AF_SETUP == "yes" ]; then
+        	echo""
+        	echo "You are currently running $AF_ENGINE IPS mode."
+        	echo "You can not switch.  Unless you reset it."
+        	exit
+	else
+	        echo ""
+	        echo "IDS/IPS not yet setup."
+        	exit
+	fi
+else
+        echo ""
+        echo "IDS/IPS not yet setup."
+        exit
+fi
+
+if [ $DEPLOYMENT == "console" ]; then
+	echo ""
+	echo "Currently is Console, cannot switch."
+	exit
+fi
+
+# Main routine
+if  [ $ENGINE == "snort" ]; then
+	echo""
+	echo "You are currently running snort IDS"
+	PS4='Please enter your choice (type 1 for Suricata or 2 for both [Suricata+Snort], 3 to Quit):'
+	options=("suricata" "both" "quit")
+
+	select opt in "${options[@]}"
+	do
+    		case $opt in
+        	"suricata")
+            		echo "suricata enabled"
+            		sed -i 's/snort/suricata/g' /etc/smoothsec.cfg
+            		crontab /usr/local/smoothsec/cronempty
+            		crontab /usr/local/smoothsec/cronsuricata 
+            		update-rc.d  -f snort remove
+            		update-rc.d suricata defaults
+            		/etc/init.d/snort stop
+            		sleep 3
+            		/etc/init.d/suricata start
+
+            		break
+            		;;
+        	"both")
+            		echo "both enabled"
+            		sed -i 's/snort/both/g' /etc/smoothsec.cfg
+            		crontab /usr/local/smoothsec/cronempty
+            		crontab /usr/local/smoothsec/cronboth
+            		update-rc.d suricata defaults
+            		/etc/init.d/suricata start
+            		break
+
+           		;;
+		"quit")
+			echo "quit"
+			exit
+			;;
+        	*) echo invalid option;;
+    		esac
+	done
+
+
+elif [ $ENGINE == "suricata" ]; then 
+	echo""
+	echo "You are currently running Suricata IDS"
+	PS4='Please enter your choice (type 1 for Snort or 2 for Snort+Suricata, 3 to Quit):'
+	options=("snort" "both" "quit")
+
+	select opt in "${options[@]}"
+	do
+    		case $opt in
+        	"snort")
+			echo "Snort enabled"
+        		sed -i 's/suricata/snort/g' /etc/smoothsec.cfg
+        		crontab /usr/local/smoothsec/cronempty
+        		crontab /usr/local/smoothsec/cronsnort 
+        		update-rc.d  -f suricata remove
+        		update-rc.d snort defaults
+        		/etc/init.d/suricata stop
+        		sleep 3
+        		/etc/init.d/snort start
+
+        		break
+            		;;
+        	"both")
+			echo "Both enabled"
+        		sed -i 's/suricata/both/g' /etc/smoothsec.cfg
+        		crontab /usr/local/smoothsec/cronempty
+        		crontab /usr/local/smoothsec/cronboth
+        		update-rc.d snort defaults
+        		/etc/init.d/snort start
+        		break
+		        ;;
+		"quit")
+			echo "quit"
+			exit
+			;;
+        	*) echo invalid option;;
+    		esac
+	done
+elif [ $ENGINE == "both" ]; then
+	echo""
+	echo "You are currently running Suricata+Snort IDS [double mode]"
+	PS4='Please enter your choice (type 1 for Snort or 2 for Suricata, 3 to Quit):'                                                  
+	options=("snort" "suricata" "quit")
+
+	select opt in "${options[@]}"
+	do
+    		case $opt in
+        	"snort")
+			echo "Snort enabled"
+       			sed -i 's/both/snort/g' /etc/smoothsec.cfg
+       			crontab /usr/local/smoothsec/cronempty
+       			crontab /usr/local/smoothsec/cronsnort 
+       			update-rc.d  -f suricata remove
+       			/etc/init.d/suricata stop
+       			/etc/init.d/snort restart
+		        break
+            		;;
+        	"suricata")
+			echo "Suricata enabled"
+        		sed -i 's/both/suricata/g' /etc/smoothsec.cfg
+        		crontab /usr/local/smoothsec/cronempty
+        		crontab /usr/local/smoothsec/cronsuricata 
+        		update-rc.d  -f snort remove
+        		/etc/init.d/snort stop
+        		/etc/init.d/suricata restart
+		        break
+           		;;
+		"quit")
+			echo "quit"
+			exit
+			;;
+        	*) echo invalid option;;
+    		esac
+	done
+
+else 
+	echo "Invalid rule input"
+
+fi
+
+

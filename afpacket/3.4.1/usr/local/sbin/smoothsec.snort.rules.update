@@ -1,0 +1,34 @@
+#!/bin/bash
+
+export PERL_LWP_SSL_VERIFY_HOSTNAME=0
+
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+fi
+
+if [ -f /etc/afpacket.cfg ]; then
+	. /etc/afpacket.cfg
+fi
+
+if [ -z "$RULES" ]; then
+	echo ""
+	echo "RULES variable not found!"
+	exit
+fi
+
+if [ $RULES == "et" ]; then
+ 	#emerging threats rules for snort
+	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/et.pulledpork.conf -o /etc/snort/et/snort.rules -P
+	/etc/init.d/snort reload
+
+elif [ $RULES == "vrt" ]; then 
+	#Official VRT rules for snort
+	/usr/local/bin/pulledpork.pl -c  /etc/pulledpork/snort/vrt.pulledpork.conf -o /etc/snort/vrt/snort.rules -P
+	/etc/init.d/snort reload
+
+else 
+	echo "Invalid rule input"
+
+fi
+
+

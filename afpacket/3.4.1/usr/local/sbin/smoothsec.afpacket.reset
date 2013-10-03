@@ -1,0 +1,68 @@
+#!/bin/bash
+# AF_PACKET Inline mode Reset
+# Reset the system to fresh install (AF_PACKET part only, smoothsec.reset will do the others)
+# samiux@smoothsec.org
+
+
+# If /etc/smoothsec.cfg exist, then load it
+if [ -f /etc/smoothsec.cfg ]; then
+	. /etc/smoothsec.cfg
+fi
+
+# Load this file
+if [ -f /etc/afpacket.cfg ]; then
+	. /etc/afpacket.cfg
+fi
+
+if [ -z "$AF_SETUP" ]; then
+	echo ""
+#	echo "IPS mode not yet setup."
+	exit
+fi
+
+# Do when AF_SETUP=yes
+if [ "$AF_SETUP" == "yes" ]; then
+	if [ "$AF_ENGINE" == "suricata" ]; then
+		# Remove the auto-run
+		update-rc.d suricata remove > /dev/null 2>&1
+
+                # Restore the original files
+		cp /usr/local/smoothsec/confs/afpacket/interfaces.original /etc/network/interfaces
+		cp /usr/local/smoothsec/confs/afpacket/suricata.yaml.original /etc/suricata/suricata.yaml
+		cp /usr/local/smoothsec/confs/afpacket/suricata.original /etc/init.d/suricata
+		cp /usr/local/smoothsec/confs/afpacket/sagan.conf.original /etc/sagan/sagan.conf
+		cp /usr/local/smoothsec/confs/afpacket/sagan.original /etc/init.d/sagan
+
+		# Move the kernel files to temp. directory
+		mv /boot/*-3.10-2-* /usr/local/smoothsec/confs/afpacket/
+		# Update the GRUB accordingly
+		update-grub
+
+		# Reset the value
+		sed -i "s|AF_SETUP=yes|AF_SETUP=no|" /etc/afpacket.cfg
+
+	elif [ "$AF_ENGINE" == "snort" ]; then
+		# Remove the auto-run
+		update-rc.d snort remove > /dev/null 2>&1
+
+		# Restore the original files
+		cp /usr/local/smoothsec/confs/afpacket/interfaces.original /etc/network/interfaces
+		cp /usr/local/smoothsec/confs/afpacket/sagan.conf.original /etc/sagan/sagan.conf
+		cp /usr/local/smoothsec/confs/afpacket/sagan.original /etc/init.d/sagan
+		cp /usr/local/smoothsec/confs/afpacket/snort.original /etc/init.d/snort
+
+		# Reset the value
+		sed -i "s|AF_SETUP=yes|AF_SETUP=no|" /etc/afpacket.cfg
+	fi	
+
+	# Resore the original files
+	if [ $DEPLOYMENT == "sensor" ]; then
+		cp /usr/local/smoothsec/confs/afpacket/tunnel.original /etc/init.d/tunnel
+	fi
+
+	update-rc.d sagan remove > /dev/null 2>&1
+	rm /etc/afpacket.cfg	
+	rm /usr/local/smoothsec/confs/afpacket/*.original
+fi
+
+echo "Reboot the system ...."
