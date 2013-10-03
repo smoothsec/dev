@@ -39,7 +39,7 @@
 
 # Default pid file.
 # Will use this file if no --pidfile in command options.
-pid-file: /var/run/suricata.pid
+#pid-file: /var/run/suricata.pid
 
 # Daemon working directory
 # Suricata will change directory to this one if provided
@@ -54,7 +54,7 @@ pid-file: /var/run/suricata.pid
 # The default logging directory.  Any log or output file will be
 # placed here if its not specified with a full path name.  This can be
 # overridden with the -l command line parameter.
-default-log-dir: /usr/local/var/log/suricata/
+default-log-dir: /var/log/suricata/
 
 # Unix command socket can be used to pass commands to suricata.
 # An external tool can then connect to get information from suricata
@@ -89,7 +89,7 @@ outputs:
 
   # a line based log of HTTP requests (no alerts)
   - http-log:
-      enabled: yes
+      enabled: no
       filename: http.log
       append: yes
       #extended: yes     # enable this for extended logging information
@@ -275,7 +275,6 @@ af-packet:
     #  - auto: suricata uses a statistical approach to detect when
     #  checksum off-loading is used.
     # Warning: 'checksum-validation' must be set to yes to have any validation
-    #checksum-checks: kernel
     checksum-checks: kernel
     # BPF filter to apply to this interface. The pcap filter syntax apply here.
     #bpf-filter: port 80 or udp
@@ -285,8 +284,8 @@ af-packet:
     # copy is complete. If 'ips' is set, the packet matching a 'drop' action
     # will not be copied.
     #copy-mode: ips
-    copy-mode: af_mode
     #copy-iface: eth1
+    copy-mode: af_mode
     copy-iface: af_iface_1
     buffer-size: 64535
   - interface: af_iface_1
@@ -308,7 +307,7 @@ af-packet:
 
 # You can specify a threshold config file by setting "threshold-file"
 # to the path of the threshold config file:
-threshold-file: /etc/suricata/threshold.config
+# threshold-file: /etc/suricata/threshold.config
 
 # The detection engine builds internal groups of signatures. The engine
 # allow us to specify the profile to use for them, to manage memory on an
@@ -344,10 +343,10 @@ detect-engine:
   - inspection-recursion-limit: 3000
   # When rule-reload is enabled, sending a USR2 signal to the Suricata process
   # will trigger a live rule reload. Experimental feature, use with care.
-  - rule-reload: true
+  #- rule-reload: true
   # If set to yes, the loading of signatures will be made after the capture
   # is started. This will limit the downtime in IPS mode.
-  - delayed-detect: yes
+  #- delayed-detect: yes
 
 # Suricata is multi-threaded. Here the threading can be influenced.
 threading:
@@ -652,7 +651,7 @@ logging:
       enabled: yes
   - file:
       enabled: yes
-      filename: /var/log/suricata.log
+      filename: /var/log/suricata/suricata.log
   - syslog:
       enabled: no
       facility: local5
@@ -759,8 +758,9 @@ default-rule-path: /etc/suricata/rules
 rule-files:
  - emerging.rules
  - local.rules
-classification-file: /etc/suricata/classification.config 
+classification-file: /etc/suricata/classification.config
 reference-config-file: /etc/suricata/reference.config
+
 # Holds variables that would be used by the engine.
 vars:
 
@@ -768,7 +768,6 @@ vars:
   # These would be retrieved during the Signature address parsing stage.
   address-groups:
 
-    #HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
     HOME_NET: "[anynet]"
 
     EXTERNAL_NET: "!$HOME_NET"
@@ -820,8 +819,8 @@ action-order:
   - alert
 
 # IP Reputation
-#reputation-categories-file: /usr/local/etc/suricata/iprep/categories.txt
-#default-reputation-path: /usr/local/etc/suricata/iprep
+#reputation-categories-file: /etc/suricata/iprep/categories.txt
+#default-reputation-path: /etc/suricata/iprep
 #reputation-files:
 # - reputation.list
 
