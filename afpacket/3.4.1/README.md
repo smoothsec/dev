@@ -8,5 +8,7 @@ It is still under heavy development, bugs and errors will be expected.
 Change Log :
 
 3.4.1 + 32-bit can use Suricata IPS AF_PACKET mode
-      + Backports kernel is installed
-      - Unstable kernel is removed
+
+      + Backports kernel is installed for Suricata IPS AF_PACKET mode
+
+      - Unstable kernel is removed for Suricata IPS AF_PACKET mode
