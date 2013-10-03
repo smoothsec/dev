@@ -64,7 +64,7 @@ download them and install them yourself.
 
 <code>unzip samiux.zip</code>
 
-<code>cd dev-samiux/afpacket/3.4/</code>
+<code>cd dev-samiux/afpacket/3.4.1/</code>
 
 <code>sudo cp -Ra * /</code>
 
