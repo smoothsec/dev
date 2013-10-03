@@ -14,11 +14,13 @@ Supports Snort and Suricata in Inline mode (IPS - Intrusion Prevention System)
 
 <h3>Download</h3>
 
-The current version is 3.4.
+The current version of SmoothSec is 3.4.
+
+The current version of SmoothSec script is 3.4.1.
 
 [You can download at here](http://http://sourceforge.net/projects/smoothsec/files/SmoothSec-3.4/)
 
-Please select 64-bit to download as there is no Suricata IPS for 32-bit.
+Please update the scripts as mentioned at the bottom of this page.
 
 <h3>Configuration</h3>
 
