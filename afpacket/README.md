@@ -18,7 +18,7 @@ The current version of SmoothSec is 3.4.
 
 The current version of SmoothSec script is 3.4.1.
 
-[You can download at here](http://http://sourceforge.net/projects/smoothsec/files/SmoothSec-3.4/)
+[You can download at here](http://sourceforge.net/projects/smoothsec/files/SmoothSec-3.4/)
 
 Please update the scripts as mentioned at the bottom of this page.
 
