@@ -68,6 +68,8 @@ download them and install them yourself.
 
 <code>cd dev-samiux/afpacket/3.4.1/</code>
 
+<code>rm README.md</code>
+
 <code>sudo cp -Ra * /</code>
 
 
