@@ -122,8 +122,8 @@ echo "#deb-src http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list
 echo "#deb http://http.us.debian.org/debian stable main contrib non-free" >> /etc/apt/sources.list.d/smoothsec.list
 echo "deb http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main" >> /etc/apt/sources.list.d/smoothsec.list
 echo "deb-src http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main"  >> /etc/apt/sources.list.d/smoothsec.list
-echo "deb http://ftp.us.debian.org/debian/wheezy-backports main" >> /etc/apt/sources.list.d/smoothsec.list
-echo "deb-src http://ftp.us.debian.org/debian/wheezy-backports main" >> /etc/apt/sources.list.d/smoothsec.list
+echo "deb http://ftp.us.debian.org/debian/ wheezy-backports main" >> /etc/apt/sources.list.d/smoothsec.list
+echo "deb-src http://ftp.us.debian.org/debian/ wheezy-backports main" >> /etc/apt/sources.list.d/smoothsec.list
 #end samiux tip
 
 
