@@ -34,9 +34,9 @@ if [ "$AF_SETUP" == "yes" ]; then
 		cp /usr/local/smoothsec/confs/afpacket/sagan.original /etc/init.d/sagan
 
 		# Move the kernel files to temp. directory
-		mv /boot/*-3.10-2-* /usr/local/smoothsec/confs/afpacket/
+#		mv /boot/*-3.10-2-* /usr/local/smoothsec/confs/afpacket/
 		# Update the GRUB accordingly
-		update-grub
+#		update-grub
 
 		# Reset the value
 		sed -i "s|AF_SETUP=yes|AF_SETUP=no|" /etc/afpacket.cfg
