@@ -72,5 +72,10 @@ download them and install them yourself.
 
 <code>sudo cp -Ra * /</code>
 
+After doing that, make sure to remove the downloaded zip file and extracted directory :
+
+<code>rm -R dev-samiux</code>
+
+<code>rm samiux.zip</code>
 
 
