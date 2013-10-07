@@ -15,7 +15,7 @@ Secondary, the IP address of that network interface should be assigned by
 DHCP.  Otherwise, the SmoothSec will be broken or acting abnormal.
 
 Finally, you should at least equipped with 4GB RAM and 300GB hard drive.  
-In our lab, we have tested Intel Atom D510 and D2250 with 4GB RAM which are 
+In our lab, we have tested Intel Atom D510 and D2550 with 4GB RAM which are 
 running properly and smooth for a home or SOHO environment.  That is the hints
 for purchasing hardware for deploying SmoothSec.
 
@@ -31,7 +31,7 @@ Thirdly, make sure you change the configure file when setting up the SmoothSec.
 For example, which engine?  Snort or Suricata?
 
 Finally, you should at least equipped with 4GB RAM and 300GB hard drive.
-In our lab, we have tested Intel Atom D510 and D2250 with 4GB RAM which are
+In our lab, we have tested Intel Atom D510 and D2550 with 4GB RAM which are
 running properly and smooth for a home or SOHO environment.  That is the hints
 for purchasing hardware for deploying SmoothSec.
 
@@ -54,5 +54,6 @@ and the other is installed as "ips-sensor".  The management interface will be
 at "ips-standard" box.
 
 Samiux
+
 October 8, 2013
 
