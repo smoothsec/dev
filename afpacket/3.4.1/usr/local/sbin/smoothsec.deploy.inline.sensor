@@ -81,6 +81,7 @@ read -p "You are going to edit the configure file.  CTRL+o to save.  CTRL+x to e
 echo""
 
 # run smoothsec.afpacket.standard.setup
+#apt-get update
 smoothsec.afpacket.standard.setup
 
 # Confige the SSH key pair
