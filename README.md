@@ -14,8 +14,7 @@ to the SPAN (or Port Mirroring) port.
 Secondary, the IP address of that network interface should be assigned by
 DHCP.  Otherwise, the SmoothSec will be broken or acting abnormal.
 
-Finally, you should at least equipped with 4GB RAM and 300GB hard drive.  In 
-our lab, we have tested Intel Atom D510 and D2550 with 4GB RAM which are 
+Finally, in our lab, we have tested Intel Atom D510 and D2550 with 4GB RAM which are 
 running properly and smooth for a home or SOHO environment.  That is the hints
 for purchasing hardware for deploying SmoothSec.
 
@@ -30,8 +29,7 @@ which will be set while running "smoothsec.first.setup" script.
 Thirdly, make sure you change the configure file when setting up the SmoothSec.
 For example, which engine?  Snort or Suricata?
 
-Finally, you should at least equipped with 4GB RAM and 300GB hard drive.
-In our lab, we have tested Intel Atom D510 and D2550 with 4GB RAM which are
+Finally, in our lab, we have tested Intel Atom D510 and D2550 with 4GB RAM which are
 running properly and smooth for a home or SOHO environment.  That is the hints
 for purchasing hardware for deploying SmoothSec.
 
