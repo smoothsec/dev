@@ -52,7 +52,7 @@ sleep 3
 echo "Starting Snort....."
 /usr/local/bin/snort -u snort  --daq afpacket --daq-var buffer_size_mb=$AF_BUFFER_SIZE -i $AF_IFACE_0:$AF_IFACE_1 -Q  -c /etc/snort/snort.conf  -S RULE_PATH=/etc/snort/$RULES -D
 echo "Starting pigsty....."
-/usr/local/bin/pigsty -c /etc/pigsty/snort.$RULES.pigsty.config.js -i $INTERFACE_DEF -n "Snort $AF_SENSOR_IP" -d /var/log/snort/ -m snort.unified2.*  -D
+/usr/local/bin/pigsty -c /etc/pigsty/snort.$RULES.pigsty.config.js -i $AF_IFACE_0 -n "Snort $AF_SENSOR_IP" -d /var/log/snort/ -m snort.unified2.*  -D
 ;;
 
 reload)
