@@ -80,19 +80,21 @@ echo "#deb-src http://repo.percona.com/apt wheezy main" >> /etc/apt/sources.list
 echo "#deb http://http.us.debian.org/debian stable main contrib non-free" >> /etc/apt/sources.list.d/smoothsec.list
 echo "deb http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main" >> /etc/apt/sources.list.d/smoothsec.list
 echo "deb-src http://mirrors.supportex.net/mariadb/repo/5.5/debian wheezy main"  >> /etc/apt/sources.list.d/smoothsec.list
-echo "deb http://ftp.us.debian.org/debian/ wheezy-backports main" >> /etc/apt/sources.list.d/smoothsec.list
-echo "deb-src http://ftp.us.debian.org/debian/ wheezy-backports main" >> /etc/apt/sources.list.d/smoothsec.list
+#echo "deb http://ftp.us.debian.org/debian/ wheezy-backports main" >> /etc/apt/sources.list.d/smoothsec.list
+#echo "deb-src http://ftp.us.debian.org/debian/ wheezy-backports main" >> /etc/apt/sources.list.d/smoothsec.list
 #end samiux tip
 
 echo"" 
 echo -e "\033[1;33mNetwork setup..\033[0m\n"
-echo "Interface - IP Address" 
-/sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }'|sed -e '/lo/d' |awk -F: '{ print $1 "        " $3 }'  
+#echo "Interface - IP Address" 
+#/sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }'|sed -e '/lo/d' |awk -F: '{ print $1 "        " $3 }'  
+echo "Management IP address"
+read -p "(A static IP address.  e.g. 192.168.1.180):" SENSOR_IP
 echo"" 
 echo  "Enter the interface to access Snorby web console:" 
 read -p "(only one interface is allowed,e.g. eth0):" VAR_INPUT
 echo 'INTERFACE_DEF='$VAR_INPUT >> /etc/smoothsec.cfg
-SENSOR_IP=$(/sbin/ifconfig $VAR_INPUT | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' | sed -e 's/127.0.0.1//g')
+#SENSOR_IP=$(/sbin/ifconfig $VAR_INPUT | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' | sed -e 's/127.0.0.1//g')
 sed -i "s|anynet|$SENSOR_IP|" /etc/sagan/sagan.conf
 sed -i "s|demo.snorby.org|$SENSOR_IP|" /var/www/snorby/config/snorby_config.yml
 sed -i "s|#interface = eth0|interface = $VAR_INPUT|" /etc/arpalert/arpalert.conf
