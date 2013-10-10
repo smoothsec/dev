@@ -88,7 +88,7 @@ echo""
 echo -e "\033[1;33mNetwork setup..\033[0m\n"
 #echo "Interface - IP Address" 
 #/sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }'|sed -e '/lo/d' |awk -F: '{ print $1 "        " $3 }'  
-echo "Management IP address"
+echo "Interface - IP address"
 read -p "(A static IP address.  e.g. 192.168.1.180):" SENSOR_IP
 echo"" 
 echo  "Enter the interface to access Snorby web console:" 
