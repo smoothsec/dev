@@ -142,7 +142,7 @@ do
             echo -e "\033[1;33mNetwork setup..\033[0m\n"
 #            echo "Interface - IP Address" 
 #            /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }'|sed -e '/lo/d' |awk -F: '{ print $1 "        " $3 }'  
-
+	    
 	    echo "Enter the Management Interface"
 	    read -p "(e.g. eth1) :" MANAGEMENT_IFACE
 	    echo ""
@@ -222,11 +222,23 @@ do
             echo "You chose Suricata."
             echo""
             echo -e "\033[1;33mNetwork setup..\033[0m\n"
-            echo "Interface - IP Address" 
-            /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }'|sed -e '/lo/d' |awk -F: '{ print $1 "        " $3 }'  
+#            echo "Interface - IP Address" 
+#            /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }'|sed -e '/lo/d' |awk -F: '{ print $1 "        " $3 }'  
             echo""
-            echo  "Enter the interface to monitor,"
-            read -p "(only one interface is allowed,e.g. eth0):" VAR_INPUT
+
+            echo "Enter the Management Interface"
+            read -p "(e.g. eth1) :" MANAGEMENT_IFACE
+            echo ""
+            echo "Enter the Management IP address"
+            read -p "(A static IP address.  e.g. 192.168.1.180):" SENSOR_IP
+            echo ""
+            echo  "Enter the interface to monitor"
+            read -p "(e.g. eth0) :" VAR_INPUT
+            echo ""
+            echo "Enter the Gateway IP"
+            read -p "(e.g. 192.168.1.1) :" GATEWAY_IP
+            echo ""
+
             echo 'INTERFACE_DEF='$VAR_INPUT >> /etc/smoothsec.cfg
             SENSOR_IP=$(/sbin/ifconfig $VAR_INPUT | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' | sed -e 's/127.0.0.1//g')
             sed -i "s|anynet|$SENSOR_IP|" /etc/sagan/sagan.conf
@@ -239,6 +251,16 @@ do
             echo""
             echo "#emergingthreats.net smoothsec default rules." >> /etc/smoothsec.cfg
             sed -i "s|#interface = eth0|interface = $VAR_INPUT|" /etc/arpalert/arpalert.conf
+
+            cp /etc/network/interfaces /usr/local/smoothsec/confs/interfaces.original
+            cp /usr/local/smoothsec/confs/interfaces.ids.template /etc/network/interfaces
+
+            # edit the /etc/network/interfaces
+            sed -i "s|ids_iface_0|$VAR_INPUT|" /etc/network/interfaces
+            sed -i "s|ids_manage_iface|$MANAGEMENT_IFACE|" /etc/network/interfaces
+            sed -i "s|ids_sensor_ip|$SENSOR_IP|" /etc/network/interfaces
+            sed -i "s|ids_gateway|$GATEWAY_IP|" /etc/network/interfaces
+
             echo 'RULES=et' >> /etc/smoothsec.cfg
             echo "#Delete Snort/Suricata/Sagan unified files older than x-days" >> /etc/smoothsec.cfg
             echo 'DAYS=3'  >> /etc/smoothsec.cfg
