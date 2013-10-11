@@ -165,7 +165,9 @@ function reset_smoothsec() {
 
 	fi
 
-	cp /usr/local/smoothsec/confs/interfaces.original /etc/network/interfaces
+	if [ -f /usr/local/smoothsec/confs/interfaces.original ]; then
+		cp /usr/local/smoothsec/confs/interfaces.original /etc/network/interfaces
+	fi
 
 	cd /
 	cp /usr/local/smoothsec/rc.local.reset /etc/rc.local
