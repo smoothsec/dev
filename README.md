@@ -1,8 +1,10 @@
 <h1>SmoothSec Without Tears</h1>
 
-Editor  : Samiux</br>
-Version : 0.1</br>
-Dated   : October 12, 2013</br>
+Editor  : Samiux
+
+Version : 0.1
+
+Dated   : October 12, 2013
  
 <h3>Part I - Introduction</h3>
 
@@ -13,23 +15,37 @@ The current version of SmoothSec is 3.6 which is released on October ??, 2013.
 Main components :
 
 Debian 7 with Backports kernel
+
 Snorby - a web interface to manage the captured traffic data
+
 Snort - a IDS/IPS Engine
+
 Suricata - a IDS/IPS Engine
+
 Sagan - a HIDS Engine (installed by default)
+
 PulledPork - a Snort/Suricata rules management tool
+
 Pigsty - a traffic spooler
 
 Additional tools :
 
 tcpxtract - a tool for extracting files from network traffic
+
 netdiscover - an active/passive address reconnaissance tool
+
 ngrep - a pcap-aware tool which search data payloads of packets by regular exprssions
+
 nast - a packet sniffer and a LAN analyzer
+
 ipgrab - a verbose packet sniffer
+
 tshark - dump and analyze network traffic
+
 greppcap.py - a tool to find data in a pcap format using regular expression
+
 percona-toolkit - a MySQL collection of advanced command-line tools 
+
 percona-xtrabackup - a MySQL backup tool
 
 (A) Minimum Hardware Requirement
@@ -55,11 +71,13 @@ For IPS, you must set Snort and Suricata in two different boxes.  However, you c
 To update or upgrade the SmoothSec, you can issue the following commands with root privileges.
 
 sudo apt-get update
+
 sudo apt-get dist-upgrade
 
 To update or upgrade the scripts, you can issue the following commands with root privileges.
 
 cd /root/updates
+
 git pull
 
 (Then run the scripts that downloaded.)
@@ -71,6 +89,7 @@ Make sure you do not enter a wrong answer as the setup script has no error check
 (C) Standard
 
 eth0 - interface for capture (monitoring)
+
 eth1 - interface for management (for web interface access)
 
 Make sure eth0 is connected to SPAN (or port mirroring) port.
@@ -78,6 +97,7 @@ Make sure eth0 is connected to SPAN (or port mirroring) port.
 To run the following commands, you should have root privileges.
 
 smoothsec.first.setup
+
 standard
 
 Then answer the questions on the screen according to your network.
@@ -94,6 +114,7 @@ eth0 - interface for management (for web interface access and SSH tunnel)
 To run the following commands, you should have root privileges.
 
 smoothsec.first.setup
+
 console
 
 Then answer the questions on the screen according to your network.
@@ -101,11 +122,13 @@ Then answer the questions on the screen according to your network.
 To reset back to the fresh install, you can issue the following command.
 
 smoothsec.reset
+
 reboot
 
 (E) Sensor
 
 eth0 - interface for capture (or monitoring)
+
 eth1 - interface for management (for SSH tunnel)
 
 Make sure eth0 is connected to SPAN (or port mirroring) port.
@@ -113,6 +136,7 @@ Make sure eth0 is connected to SPAN (or port mirroring) port.
 To run the following commands, you should have root privileges.
 
 smoothsec.first.setup
+
 sensor
 
 Then answer the questions on the screen according to your network as well as the setting of "console".
@@ -120,6 +144,7 @@ Then answer the questions on the screen according to your network as well as the
 To reset back to the fresh install, you can issue the following command.
 
 smoothsec.reset
+
 reboot
 
 (F) Switch Engines
@@ -167,12 +192,15 @@ Make sure you do not enter a wrong answer as the setup script has no error check
 (G) Standard
 
 eth0 - interface for capture (incoming monitoring)
+
 eth1 - interface for capture (outgoing monitoring)
+
 eth2 - interface for management (for web interface access)
 
 To run the following commands, you should have root privileges.
 
 smoothsec.first.setup
+
 ips-standard
 
 Then answer the questions on the screen according to your network.
@@ -180,6 +208,7 @@ Then answer the questions on the screen according to your network.
 To reset back to the fresh install, you can issue the following command.
 
 smoothsec.reset
+
 reboot
 
 (H) Console
@@ -189,6 +218,7 @@ eth0 - interface for management (for web interface access and SSH tunnel)
 To run the following commands, you should have root privileges.
 
 smoothsec.first.setup
+
 ips-console
 
 Then answer the questions on the screen according to your network.
@@ -196,17 +226,21 @@ Then answer the questions on the screen according to your network.
 To reset back to the fresh install, you can issue the following command.
 
 smoothsec.reset
+
 reboot
 
 (I) Sensor
 
 eth0 - interface for capture (incoming monitoring)
+
 eth1 - interface for capture (outgoing monitoring)
+
 eth2 - interface for management (for SSH tunnel)
 
 To run the following commands, you should have root privileges.
 
 smoothsec.first.setup
+
 ips-sensor
 
 Then answer the questions on the screen according to your network as well as the setting of "console".
@@ -214,6 +248,7 @@ Then answer the questions on the screen according to your network as well as the
 To reset back to the fresh install, you can issue the following command.
 
 smoothsec.reset
+
 reboot
 
 <h3>Part V - Rules Handling</h3>
@@ -223,11 +258,13 @@ If you want to disable some rules as they are false positive, you can edit the d
 For Snort -
 
 cd /etc/pulledpork/snort
+
 nano disablesid.conf
 
 For Suricata -
 
 cd /etc/pulledpork/suricata
+
 nano disablesid.conf
 
 If you are running IPS and you want to drop some traffic, you can edit the dropsid.conf of pulledpork.
@@ -235,11 +272,13 @@ If you are running IPS and you want to drop some traffic, you can edit the drops
 For Snort -
 
 cd /etc/pulldpork/snort
+
 nano dropsid.conf
 
 For Suricata -
 
 cd /etc/pulledpork/suricata
+
 nano dropsid.conf
 
 If you want to modify some rules, you can edit the modifysid.conf of pulledpork.
@@ -247,11 +286,13 @@ If you want to modify some rules, you can edit the modifysid.conf of pulledpork.
 For Snort -
 
 cd /etc/pulledpork/snort
+
 nano modifysid.conf
 
 For Suricata -
 
 cd /etc/pulledpork/suricata
+
 nano modifysid.conf
 
 After updated the pulledpork, you should run the following command to make the changes effective.
@@ -269,6 +310,7 @@ smoothsec.suricata.rules.update
 You may consider to jail root Apache of the SmoothSec with Apparmor.
 
 sudo apt-get update
+
 sudo apt-get install apparmor apparmor-profiles apparmor-utils
 
 Please refer the documentation of Debian for using/setup Apparmor with Apache.
@@ -282,4 +324,3 @@ In addition, make sure your passwords are very strong to prevent from being brut
 Suricata comes without scanner module.  Therefore, it will not response to any NMAP scanning or likewise.
 
 
-- END -
