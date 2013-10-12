@@ -1,8 +1,8 @@
 <h1>SmoothSec Without Tears</h1>
 
-Editor  : Samiux
-Version : 0.1
-Dated   : October 12, 2013
+Editor  : Samiux</br>
+Version : 0.1</br>
+Dated   : October 12, 2013</br>
  
 <h3>Part I - Introduction</h3>
 
