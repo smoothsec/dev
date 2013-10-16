@@ -1,8 +1,8 @@
 # SmoothSec Without Tears
 
 Editor  : Samiux<br>
-Version : 0.1<br>
-Dated   : October 12, 2013<br>
+Version : 0.2<br>
+Dated   : October 16, 2013<br>
  
 ## Part I - Introduction
 
@@ -264,7 +264,15 @@ For Suricata -
 
 smoothsec.suricata.rules.update
 
-## Part VI - Hardening SmoothSec
+## Part VI - Signatures Lookup url
+
+[Signatures Lookup URL](https://github.com/Snorby/snorby/wiki/Rule-lookups)
+
+For ET rules signatures lookup URL :
+
+http://doc.emergingthreats.net/bin/view/Main/$$sid$$
+
+## Part VII - Hardening SmoothSec
 
 You may consider to jail root Apache of the SmoothSec with Apparmor.
 
@@ -277,7 +285,7 @@ You may consider to activate the fail2ban application to protect your SSH connec
 
 In addition, make sure your passwords are very strong to prevent from being brute forcing.
 
-## Part VII - General Information
+## Part VIII - General Information
 
 Suricata comes without scanner module.  Therefore, it will not response to any NMAP scanning or likewise.
 
