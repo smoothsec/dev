@@ -52,6 +52,10 @@ For IPS, you must set Snort and Suricata in two different boxes.  However, you c
 
 ## Part II - Maintenance
 
+To run the following commands, make sure you have root privileges.
+
+### SmoothSec update/upgrade
+
 To update or upgrade the SmoothSec, you can issue the following commands with root privileges.
 
 sudo apt-get update<br>
@@ -63,6 +67,21 @@ cd /root/updates<br>
 git pull<br>
 
 (Then run the scripts that downloaded.)
+
+### Pigsty update/upgrade
+
+npm update -g pigsty<br>
+npm update -g pigsty-mysql<br>
+
+### Snorby update/upgrade
+
+git pull origin master<br>
+rake snorby:update<br>
+
+### Snort and Suricata update/upgrade
+
+apt-get update<br>
+apt-get dist-upgrade<br>
 
 ## Part III - Intrusion Detection System
 
@@ -79,6 +98,7 @@ To run the following commands, you should have root privileges.
 
 smoothsec.first.setup<br>
 standard<br>
+reboot<br>
 
 Then answer the questions on the screen according to your network.
 
@@ -95,6 +115,7 @@ To run the following commands, you should have root privileges.
 
 smoothsec.first.setup<br>
 console<br>
+reboot<br>
 
 Then answer the questions on the screen according to your network.
 
@@ -114,6 +135,7 @@ To run the following commands, you should have root privileges.
 
 smoothsec.first.setup<br>
 sensor<br>
+reboot<br>
 
 Then answer the questions on the screen according to your network as well as the setting of "console".
 
@@ -174,6 +196,7 @@ To run the following commands, you should have root privileges.
 
 smoothsec.first.setup<br>
 ips-standard<br>
+reboot<br>
 
 Then answer the questions on the screen according to your network.
 
@@ -190,6 +213,7 @@ To run the following commands, you should have root privileges.
 
 smoothsec.first.setup<br>
 ips-console<br>
+reboot<br>
 
 Then answer the questions on the screen according to your network.
 
@@ -208,6 +232,7 @@ To run the following commands, you should have root privileges.
 
 smoothsec.first.setup<br>
 ips-sensor<br>
+reboot<br>
 
 Then answer the questions on the screen according to your network as well as the setting of "console".
 
@@ -264,13 +289,13 @@ For Suricata -
 
 smoothsec.suricata.rules.update
 
-## Part VI - Signatures Lookup url
+## Part VI - Signatures Lookup url (Snorby)
 
 [Signatures Lookup URL](https://github.com/Snorby/snorby/wiki/Rule-lookups)
 
 For ET rules signatures lookup URL :
 
-http://doc.emergingthreats.net/bin/view/Main/$$sid$$
+[http://doc.emergingthreats.net/bin/view/Main/$$sid$$]
 
 ## Part VII - Hardening SmoothSec
 
