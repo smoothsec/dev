@@ -295,7 +295,7 @@ smoothsec.suricata.rules.update
 
 For ET rules signatures lookup URL :
 
-[http://doc.emergingthreats.net/bin/view/Main/$$sid$$]
+http://doc.emergingthreats.net/bin/view/Main/$$sid$$
 
 ## Part VII - Hardening SmoothSec
 
