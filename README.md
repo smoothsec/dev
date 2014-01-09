@@ -10,6 +10,7 @@ SmoothSec is a lightweight and fully-ready IDS/IPS (Intrusion Detection/Preventi
 
 The current version of SmoothSec is 3.6 which is released on October ??, 2013.
 
+
 Main components :
 
 Debian 7 with Backports kernel<br>
