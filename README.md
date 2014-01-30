@@ -127,6 +127,8 @@ To reset back to the fresh install, you can issue the following command.
 smoothsec.reset<br>
 reboot<br>
 
+* For 3.4-1 script, eth0 is the monioring and management interface.
+
 ### (D) Console
 
 eth0 - interface for management (for web interface access and SSH tunnel)
