@@ -172,22 +172,22 @@ Save and exit by Ctrl-o and Ctrl-x.
 
 Then run the following command -
 
-sudo apt-get update
-apt-get -t wheezy-backports install linux-image-amd64 linux-headers-amd64
+sudo apt-get update<br>
+apt-get -t wheezy-backports install linux-image-amd64 linux-headers-amd64<br>
 
-After that, reboot the Smoothsec.
+After that, reboot the Smoothsec.<br>
 
 After the reboot, you need to update the Smoothsec script to version 3.6 -
 
-wget https://github.com/smoothsec/dev/archive/samiux.zip
-unzip samiux.zip
-cd dev-samiux/afpacket/3.6/
-rm README.md
-sudo cp -Ra * /
+wget https://github.com/smoothsec/dev/archive/samiux.zip<br>
+unzip samiux.zip<br>
+cd dev-samiux/afpacket/3.6/<br>
+rm README.md<br>
+sudo cp -Ra * /<br>
 
-cd ..
-rm -R dev-samiux
-rm samiux.zip
+cd ..<br>
+rm -R dev-samiux<br>
+rm samiux.zip<br>
 
 The script is updated.
 
