@@ -105,6 +105,8 @@ rm samiux.zip<br>
 
 The script is updated.
 
+For 3.6 script, TWO network interfaces are required.  For 3.4-1 script, ONE network interface is required.
+
 ### (C) Standard
 
 eth0 - interface for capture (monitoring)<br>
