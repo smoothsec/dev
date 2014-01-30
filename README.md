@@ -173,7 +173,7 @@ Save and exit by Ctrl-o and Ctrl-x.
 Then run the following command -
 
 sudo apt-get update<br>
-apt-get -t wheezy-backports install linux-image-amd64 linux-headers-amd64<br>
+sudo apt-get -t wheezy-backports install linux-image-amd64 linux-headers-amd64<br>
 
 After that, reboot the Smoothsec.<br>
 
