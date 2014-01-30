@@ -8,7 +8,7 @@ Dated   : October 16, 2013<br>
 
 SmoothSec is a lightweight and fully-ready IDS/IPS (Intrusion Detection/Prevention System) Linux distribution based on Debian, available for 32 and 64-bit architecture.  An easy setup process allows to deploy a complete IDS/IPS system within minutes, even for security beginners with minimal Linux experience.
 
-The current version of SmoothSec is 3.6 which is released on October ??, 2013.
+The current version of SmoothSec is 3.4-1.
 
 
 Main components :
