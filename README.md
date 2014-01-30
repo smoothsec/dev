@@ -1,8 +1,8 @@
 # SmoothSec Without Tears
 
 Editor  : Samiux<br>
-Version : 0.2<br>
-Dated   : October 16, 2013<br>
+Version : 0.3<br>
+Dated   : January 30, 2014<br>
  
 ## Part I - Introduction
 
