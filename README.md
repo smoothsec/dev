@@ -160,6 +160,8 @@ The setup may be something like this.
 
 internet -- SmoothSec (IPS) -- router (with firewall) -- switch -- computers
 
+<b>Upgrade the Kernel</b><br>
+
 Update the kernel to backports version as Suricata (af_packet) only works on kernel 3.6 or later :
 
 sudo nano /etc/apt/sources.list
@@ -175,7 +177,12 @@ Then run the following command -
 sudo apt-get update<br>
 sudo apt-get -t wheezy-backports install linux-image-amd64 linux-headers-amd64<br>
 
-After that, reboot the Smoothsec.<br>
+After that, reboot the Smoothsec.  You may consider to update the box.<br>
+
+sudo apt-get update<br>
+sudo apt-get upgrade<br>
+sudo apt-get purge autoclean<br>
+sudo apt-get purge autoremove<br>
 
 After the reboot, you need to update the Smoothsec script to version 3.6 -
 
@@ -191,6 +198,7 @@ rm samiux.zip<br>
 
 The script is updated.
 
+<b>All About The Variables</b><br>
 
 Before going to set up an Intrusion Prevention System with SmoothSec, you should understand the following variables.
 
