@@ -158,7 +158,7 @@ smoothsec.switch.engine
 
 The setup may be something like this.
 
-internet -- SmoothSec (IPS) router (with firewall) -- switch -- computers
+internet -- SmoothSec (IPS) -- router (with firewall) -- switch -- computers
 
 Update the kernel to backports version as Suricata (af_packet) only works on kernel 3.6 or later :
 
