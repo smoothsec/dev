@@ -89,6 +89,22 @@ apt-get dist-upgrade<br>
 
 Make sure you do not enter a wrong answer as the setup script has no error checking feature.
 
+If you have a Port Mirroring or SPAN switch, you need to update the SmoothSec script to version 3.6.  If you have a home switch or switch without Port Mirroring or SPAN, you are not required to update the script.
+
+<b>Update the script to version 3.6</b>
+
+wget https://github.com/smoothsec/dev/archive/samiux.zip<br>
+unzip samiux.zip<br>
+cd dev-samiux/afpacket/3.6/<br>
+rm README.md<br>
+sudo cp -Ra * /<br>
+
+cd ..<br>
+rm -R dev-samiux<br>
+rm samiux.zip<br>
+
+The script is updated.
+
 ### (C) Standard
 
 eth0 - interface for capture (monitoring)<br>
