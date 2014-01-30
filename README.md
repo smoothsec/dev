@@ -60,7 +60,7 @@ To run the following commands, make sure you have root privileges.
 To update or upgrade the SmoothSec, you can issue the following commands with root privileges.
 
 sudo apt-get update<br>
-sudo apt-get dist-upgrade<br>
+sudo apt-get upgrade<br>
 
 To update or upgrade the scripts, you can issue the following commands with root privileges.
 
@@ -76,6 +76,7 @@ npm update -g pigsty-mysql<br>
 
 ### Snorby update/upgrade
 
+cd /var/www/snorby<br>
 git pull origin master<br>
 rake snorby:update<br>
 
